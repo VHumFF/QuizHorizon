@@ -14,15 +14,15 @@ html(lang="en")
             div.container
                 h1 Sign In
                 p Please enter your username and password
-                form(action='/login', method='post')
+                form(action="/login" method="post")
                     div.form_item
-                        input(type='text', id='username', name='username', required)
+                        input(type="text", id="username", name="username", required)
                         label.Form__FloatingLabel Username
                     div.form_item
-                        input(type='password', id='password', name='password', required)
+                        input(type="password", id="password", name="password", required)
                         label.Form__FloatingLabel Password
 
                     div.form_item
-                        input(type='submit', value='Sign In')
+                        input(type="submit", value="Sign In")
         footer 
             p © 2024 Quiz Horizon. All rights reserved.
