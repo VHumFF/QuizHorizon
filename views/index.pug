@@ -1,5 +1,26 @@
-extends layout
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        <link href='https://fonts.googleapis.com/css?family=M PLUS Rounded 1c' rel='stylesheet'>
+        title Login / Quiz Horizon
+    body 
+        header
+            div.logo 
+                img(src="/images/logo.png", alt="logo")
+        div.login
+            div.container
+                h1 Sign In
+                p Please enter your username and password
+                form(action='/login', method='post')
+                    div.form_item
+                        input(type='text', id='username', name='username', required)
+                        label.Form__FloatingLabel Username
+                    div.form_item
+                        input(type='password', id='password', name='password', required)
+                        label.Form__FloatingLabel Password
 
-block content
-  h1= title
-  p Welcome to #{title}
+                    div.form_item
+                        input(type='submit', value='Sign In')

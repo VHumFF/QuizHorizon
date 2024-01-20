@@ -1,8 +1,114 @@
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "M PLUS Rounded 1c",sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  background-image: url("/images/fixed_bg.jpg");
+  background-size: cover;
 }
 
-a {
-  color: #00B7FF;
+header {
+  width: auto;
+  padding: 10px;
+
+}
+
+.logo img {
+  max-width: 30%;
+  height: auto;
+}
+
+
+
+.login{
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.login .container {
+  width: 350px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px 0px 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  background: transparent;
+  position: relative;
+}
+
+.login .container h1 {
+  text-align: center;
+  color: #333;
+  padding: 0px
+}
+
+.login .container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login .container p{
+  color: #555;
+  text-align: center;
+}
+
+.login .container .form_item{
+  position: relative;
+}
+
+.login .container .form_item input {
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
+  outline: none;
+}
+
+.login .container .form_item .Form__FloatingLabel{
+  position: absolute;
+  bottom: calc(100% - 8px);
+  left: 10px;
+  padding: 0 5px;
+  line-height: normal;
+  color: #555;
+  background-color: white;
+  font-size: 14px;
+}
+
+
+.login .container .form_item input[type="submit"] {
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: ease-in-out 0.45s;
+  box-shadow: inset 0 0 0 0 white;
+  outline: none;
+}
+
+.login .container .form_item input[type="submit"]:hover {
+  box-shadow: inset 400px 0 0 0 white;
+  color:#5bc0de;
+
+}
+
+@media screen and (max-width: 1000px) {
+  .logo img {
+    max-width: 40%; /* Adjust the logo size for smaller screens */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .logo img {
+    max-width: 50%; /* Adjust the logo size for smaller screens */
+  }
 }
