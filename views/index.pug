@@ -4,7 +4,7 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel='stylesheet', href='/stylesheets/style.css')
-        <link href='https://fonts.googleapis.com/css?family=M PLUS Rounded 1c' rel='stylesheet'>
+        link(href='https://fonts.googleapis.com/css?family=M PLUS Rounded 1c' rel='stylesheet')
         title Login / Quiz Horizon
     body 
         header
@@ -14,6 +14,11 @@ html(lang="en")
             div.container
                 h1 Sign In
                 p Please enter your username and password
+                if loginFailed
+                    div(style="background-color: #e4c4c4; padding: 10px; color: #cb2b2b; font-size: 0.8rem; text-align: left;height: 20px; margin-bottom: 15px;") Incorrect username or password.
+                else 
+                    div(style="background transparent; padding: 10px;height: 20px; margin-bottom:15px")
+
                 form(action="/login" method="post")
                     div.form_item
                         input(type="text", id="username", name="username", required)

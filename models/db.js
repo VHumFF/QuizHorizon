@@ -1,4 +1,3 @@
-// database.js
 const db = require('../config/database');
 
 db.connect((err) => {

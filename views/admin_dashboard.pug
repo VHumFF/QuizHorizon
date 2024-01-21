@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    div.dashboard
+        nav.sidebar
+            img(src="/images/logo.png", alt="logo")
+
+            h2 Dashboard
+            ul
+                li
+                    a#um_btn(href='#') User Management
+                    ul.um-show 
+                        li 
+                            a(href="#") create 
+                        li 
+                            a(href="#") edit 
+
+                li
+                    a(href='#') Subject Management
+                    ul 
+                        li 
+                            a(href="#") test
+
+
+        div.content
+            h1 Admin Dashboard
+            p Welcome to the admin dashboard!
+            a(href="logout") Logout
+
+            // Add more content or components as needed
+    footer 
+            p © 2024 Quiz Horizon. All rights reserved.
+
+
+    script(src = "javascripts/navibar.js")
