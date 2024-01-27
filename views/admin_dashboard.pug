@@ -11,7 +11,7 @@ block content
             img(src="/images/logo_white.png", alt="logo")
             ul
                 li 
-                    a(href="/admin_dashboard") Dashboard 
+                    a(href="/admin_dashboard", style="color:red") Dashboard 
                 li
                     a#um_btn(href='#') User Management
                     ul#um-show 
@@ -35,7 +35,7 @@ block content
         nav.mobile-nav
             ul
                 li 
-                    a(href="/admin_dashboard") Dashboard 
+                    a(href="/admin_dashboard", style="color:red") Dashboard 
                 li
                     a#mobile_um_btn(href='#') User Management
                     ul#mobile_um-show 
@@ -60,9 +60,8 @@ block content
         div.content
             h1 Admin Dashboard
             p Welcome to the admin dashboard!
-            a(href="logout") Logout
 
-            // Add more content or components as needed
+
     footer 
         p © 2024 Quiz Horizon. All rights reserved.
 
