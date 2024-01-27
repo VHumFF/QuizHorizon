@@ -1,25 +1,60 @@
 extends layout
 
 block content
-    div.dashboard
-        nav.sidebar
-            img(src="/images/logo.png", alt="logo")
 
-            h2 Dashboard
+    header.mobile-header 
+        button.hamburger 
+            div.bar 
+        img(src="/images/logo_white.png", alt="logo")
+    div.dashboard
+        nav
+            img(src="/images/logo_white.png", alt="logo")
             ul
+                li 
+                    a(href="/admin_dashboard") Dashboard 
                 li
                     a#um_btn(href='#') User Management
-                    ul.um-show 
+                    ul#um-show 
                         li 
-                            a(href="#") create 
+                            a(href="/user_list") User List
                         li 
-                            a(href="#") edit 
-
+                            a(href="#") Create User Account 
                 li
-                    a(href='#') Subject Management
-                    ul 
+                    a#sm_btn(href='#') Subject Management
+                    ul#sm-show 
                         li 
-                            a(href="#") test
+                            a(href="#") Subject List 
+                        li
+                            a(href="#") Create Subject 
+                        li 
+                            a(href="#") Subject Enrollment
+                li 
+                    a.logout(href="logout") Logout
+
+        
+        nav.mobile-nav
+            ul
+                li 
+                    a(href="/admin_dashboard") Dashboard 
+                li
+                    a#mobile_um_btn(href='#') User Management
+                    ul#mobile_um-show 
+                        li 
+                            a(href="/user_list") User List
+                        li 
+                            a(href="#") Create User Account 
+                li
+                    a#mobile_sm_btn(href='#') Subject Management
+                    ul#mobile_sm-show 
+                        li 
+                            a(href="#") Subject List 
+                        li
+                            a(href="#") Create Subject 
+                        li 
+                            a(href="#") Subject Enrollment
+                li 
+                    a.logout(href="logout") Logout  
+
 
 
         div.content
@@ -29,7 +64,7 @@ block content
 
             // Add more content or components as needed
     footer 
-            p © 2024 Quiz Horizon. All rights reserved.
+        p © 2024 Quiz Horizon. All rights reserved.
 
 
     script(src = "javascripts/navibar.js")
