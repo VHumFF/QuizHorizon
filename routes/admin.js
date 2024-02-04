@@ -15,7 +15,8 @@ router.get('/user_list', restrictTo('admin'), (req, res) => {
 router.get('/api/user-details', async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const user = await userListController.getUserDetails(page);
+    const search = req.query.search || "";
+    const user = await userListController.getUserDetails(page, search);
     res.json(user);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
