@@ -1,8 +1,89 @@
-doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
-    body 
-        h1 user list
+extends layout
+
+block content
+
+    header.mobile-header 
+        button.hamburger 
+            div.bar 
+        img(src="/images/logo_white.png", alt="logo")
+    div.page
+        nav
+            img(src="/images/logo_white.png", alt="logo")
+            ul
+                li 
+                    a(href="/admin_dashboard") Dashboard 
+                li
+                    a#um_btn(href='#') User Management
+                    ul#um-show 
+                        li 
+                            a(href="/user_list", style="color:red; border-bottom: 1px solid red") User List
+                        li 
+                            a(href="#") Create User Account 
+                li
+                    a#sm_btn(href='#') Subject Management
+                    ul#sm-show 
+                        li 
+                            a(href="#") Subject List 
+                        li
+                            a(href="#") Create Subject 
+                        li 
+                            a(href="#") Subject Enrollment
+                li 
+                    a.logout(href="logout") Logout
+     
+        nav.mobile-nav
+            ul
+                li 
+                    a(href="/admin_dashboard") Dashboard 
+                li
+                    a#mobile_um_btn(href='#') User Management
+                    ul#mobile_um-show 
+                        li 
+                            a(href="/user_list", style="color:red; border-bottom: 1px solid red") User List
+                        li 
+                            a(href="#") Create User Account 
+                li
+                    a#mobile_sm_btn(href='#') Subject Management
+                    ul#mobile_sm-show 
+                        li 
+                            a(href="#") Subject List 
+                        li
+                            a(href="#") Create Subject 
+                        li 
+                            a(href="#") Subject Enrollment
+                li 
+                    a.logout(href="logout") Logout  
+
+        div.container(style='flex-direction:column; flex:1;')
+            div.
+            h1 User List
+            div#table_list_wrapper
+                div#table_list_filter
+                    label Search
+                        input(type='search', class='', placeholder='', name="search")
+                table
+                    thead
+                        tr
+                            th Username
+                            th Role
+                            th Full Name
+                            th E-mail
+                            th Address
+                            th Operation
+                        tbody#userTableBody
+
+                    // Add your table data rows here
+            #confirmationModal.modal
+                .modal-content
+                    p Are you sure you want to delete this user?
+                    button#confirmDelete Yes
+                    button#cancelDelete Cancel
+                        
+
+
+
+    footer 
+        p © 2024 Quiz Horizon. All rights reserved.
+
+    script(src = "javascripts/navibar.js")
+    script(src = "javascripts/userlist.js")

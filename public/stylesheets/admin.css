@@ -1,0 +1,22 @@
+.statistic  {
+  background: rgba(16, 62, 87, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border: 1px solid rgba(16, 62, 87, 0.12);
+  padding: 50px;
+  text-align: center;
+  margin: 50px;
+  height: 280px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.statistic  p {
+  margin: 0;
+}
+
+.statistic  img{
+  width: 200px;
+}

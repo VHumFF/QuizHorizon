@@ -88,14 +88,14 @@
 @media screen and (max-width: 1024px) {
 
   .logo img {
-    max-width: 40%; /* Adjust the logo size for smaller screens */
+    max-width: 40%;
   }
 
 }
 
 @media screen and (max-width: 768px) {
   .logo img {
-    max-width: 50%; /* Adjust the logo size for smaller screens */
+    max-width: 50%;
   }
 
 }
