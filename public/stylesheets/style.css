@@ -9,7 +9,7 @@ body {
   margin: 0;
   min-height: 100vh;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
 
 }
 
@@ -86,8 +86,9 @@ th{
   background-color: blue;
   padding: 5px;
   color: white;
+  word-wrap: break-word;
 }
-
+  
 .modal {
   display: none;
   position: fixed;
@@ -106,6 +107,20 @@ th{
   text-align: center;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.even {
+  background-color: #313131;
+  color: white;
+  line-height: 3;
+  word-wrap: break-word;
+}
+
+.odd {
+  background-color: transparent;
+  line-height: 3;
+  word-wrap: break-word;
 }
 
 @media screen and (max-width: 1024px) {

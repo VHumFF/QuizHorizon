@@ -13,12 +13,13 @@ router.get('/user_list', restrictTo('admin'), (req, res) => {
 });
 
 router.get('/api/user-details', async (req, res) => {
-    try {
-      const user = await userListController.getUserDetails();
-      res.json(user);
-    } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const user = await userListController.getUserDetails(page);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 router.delete('/users/:userId', userListController.deleteUser);

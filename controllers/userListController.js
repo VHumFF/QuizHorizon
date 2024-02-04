@@ -1,32 +1,36 @@
 const db = require('../models/db');
 
-function getUserDetails() {
-    return new Promise((resolve, reject) => {
-      let sql = `
-        SELECT
-          users.user_id,
-          users.username,
-          users.role,
-          user_details.full_name,
-          user_details.email,
-          user_details.address
-        FROM
-          users
-        JOIN
-          user_details ON users.user_id = user_details.user_id;`;
-  
-      db.query(sql, (err, results) => {
-        if (err) {
-          console.error('Error executing MySQL query:', err);
-          reject(err);
-          return;
-        }
-        const rows = results;
-        resolve(rows);
+const ITEMS_PER_PAGE = 10; // Adjust the number of items per page as needed
+
+function getUserDetails(page) {
+  const offset = (page - 1) * ITEMS_PER_PAGE;
+  return new Promise((resolve, reject) => {
+    let sql = `
+      SELECT
+        users.user_id,
+        users.username,
+        users.role,
+        user_details.full_name,
+        user_details.email,
+        user_details.address
+      FROM
+        users
+      JOIN
+        user_details ON users.user_id = user_details.user_id
+      LIMIT ?, ?;`;
+
+    db.query(sql, [offset, ITEMS_PER_PAGE], (err, results) => {
+      if (err) {
+        console.error('Error executing MySQL query:', err);
+        reject(err);
+        return;
       }
-    );
+      const rows = results;
+      resolve(rows);
+    });
   });
-};
+}
+
 
 
 const deleteUser = (req, res) => {
