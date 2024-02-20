@@ -82,7 +82,7 @@ function registerUser(username, fullname, email, address, contact, role){
     
     // Step 2: Use the auto-generated userid to insert user details into user_details table
     const userid = userResult.insertId; // Get the auto-generated userid
-    const userDetailsQuery = 'INSERT INTO user_details (userid, fullname, email, address, contact) VALUES (?, ?, ?, ?, ?)';
+    const userDetailsQuery = 'INSERT INTO user_details (user_id, full_name, email, address, contact) VALUES (?, ?, ?, ?, ?)';
     const userDetailsData = [userid, fullname, email, address, contact];
     db.query(userDetailsQuery, userDetailsData, (error, userDetailsResult, fields) => {
         if (error) {
