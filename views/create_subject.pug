@@ -54,22 +54,22 @@ block content
             h1 Create User Account
             div.SubjectCreate
                 div.container
-                    div.form_item
-                        label(for="subjectname") Subject Name  
-                        input(type='text', placeholder='', name="username")
-                    div.form_item
-                        label(for="fullname") Assign Instructor 
-                        select(name='instructor', id='instructor')
-                            option(value='volvo') Volvo
-                            option(value='saab') Saab
-                            option(value='mercedes') Mercedes
-                            option(value='audi') Audi
-                    div.form_item        
-                        input(type="submit", value="Create")
+                    form#subjectForm
+                        div.form_item
+                            p#subjectError Invalid Subject name, must be 3-35 characters long and contain only letters.
+                            label Subject Name  
+                                input(type='text', placeholder='', name="subjectname", autocomplete="name")
+                        div.form_item
+                            label Assign Instructor 
+                                select(name='instructor', id='selectInstructor')
+                                
+                        div.form_item        
+                            input(type="submit", value="Create", id="createBtn")
 
 
     footer 
         p © 2024 Quiz Horizon. All rights reserved.
 
     script(src = "javascripts/navibar.js")
+    script(src = "javascripts/create_subject.js")
     link(rel='stylesheet', href='/stylesheets/admin.css')

@@ -205,7 +205,10 @@ td {
   color: red;
   display: none;
 }
-
+#subjectError {
+  color: red;
+  display: none;
+}
 
 
 
@@ -229,20 +232,15 @@ td {
   margin-right: auto;
 }
 
-.SubjectCreate .container .form_item {
+.SubjectCreate .container #subjectForm {
   width: 100%;
 }
 
-.SubjectCreate .container .form_item label {
+.SubjectCreate .container #subjectForm .form_item {
   width: 100%;
-  box-sizing: border-box;
-  display: block;
-  padding: 3px;
-  outline: none;
-  margin-right: auto;
 }
 
-.SubjectCreate .container .form_item select {
+.SubjectCreate .container #subjectForm .form_item label {
   width: 100%;
   box-sizing: border-box;
   display: block;
@@ -251,7 +249,16 @@ td {
   margin-right: auto;
 }
 
-.SubjectCreate .container .form_item input {
+.SubjectCreate .container #subjectForm .form_item select {
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  padding: 3px;
+  outline: none;
+  margin-right: auto;
+}
+
+.SubjectCreate .container #subjectForm .form_item input {
   width: 100%;
   box-sizing: border-box;
   display: block;
@@ -262,7 +269,7 @@ td {
   outline: none;
 }
 
-.SubjectCreate .container .form_item input[type="submit"] {
+.SubjectCreate .container #subjectForm .form_item input[type="submit"] {
   background-color: #001F3F;
   border-color: #001F3F;
   color: #fff;
@@ -273,7 +280,7 @@ td {
   outline: none;
 }
 
-.SubjectCreate .container .form_item input[type="submit"]:hover {
+.SubjectCreate .container #subjectForm .form_item input[type="submit"]:hover {
   box-shadow: inset 1000px 0 0 0 white;
   color:#001F3F;
 }

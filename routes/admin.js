@@ -4,6 +4,7 @@ const restrictTo = require('../middlewares/auth_middleware');
 const userListController = require('../controllers/userListController');
 const adminSubjectListController = require('../controllers/adminSubjectListController');
 const create_userController = require('../controllers/create_userController');
+const create_subjectController = require('../controllers/create_subjectController');
 
 
 router.get('/user_list', restrictTo('admin'), (req, res) => {
@@ -102,6 +103,35 @@ router.post('/register', (req, res) => {
   const { username, fullname, email, contact, address, role } = req.body;
   create_userController.registerUser(username, fullname, email, address, contact, role);
   res.status(200).json({ message: 'User registered successfully' });
+});
+
+
+router.get('/api/instructorList', async (req, res) => {
+  try {
+    const instructorList = await create_subjectController.getInstructorList();
+    res.json({ instructorList });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+router.post('/validateSubjectName', (req, res) => {
+  const { subName } = req.body;
+  const subNameValid = create_subjectController.validateSubjectName(subName);
+
+
+  res.json(subNameValid);
+
+});
+
+router.post('/createSubject', (req, res) => {
+  const { subName, selectedValue } = req.body;
+
+  create_subjectController.createSubject(subName, selectedValue);
+
+  res.status(200).json({ message: 'Subject created successfully' });
 });
 
 module.exports = router;
