@@ -1,0 +1,88 @@
+extends layout
+
+block content
+    header.mobile-header 
+        button.hamburger 
+            div.bar 
+        img(src="/images/logo_white.png", alt="logo")
+    div.page
+        nav
+            img(src="/images/logo_white.png", alt="logo")
+            ul
+                li 
+                    a(href="/admin_dashboard") Dashboard 
+                li
+                    a#um_btn(href='#') User Management
+                    ul#um-show 
+                        li 
+                            a(href="/user_list") User List
+                        li 
+                            a(href="/create_user", style="color:red; border-bottom: 1px solid red") Create User Account 
+                li
+                    a#sm_btn(href='#') Subject Management
+                    ul#sm-show 
+                        li 
+                            a(href="/admin_subjectlist") Subject List 
+                        li
+                            a(href="/create_subject") Create Subject 
+                li 
+                    a.logout(href="logout") Logout
+     
+        nav.mobile-nav
+            ul
+                li 
+                    a(href="/admin_dashboard") Dashboard 
+                li
+                    a#mobile_um_btn(href='#') User Management
+                    ul#mobile_um-show 
+                        li 
+                            a(href="/user_list") User List
+                        li 
+                            a(href="/create_user", style="color:red; border-bottom: 1px solid red") Create User Account 
+                li
+                    a#mobile_sm_btn(href='#') Subject Management
+                    ul#mobile_sm-show 
+                        li 
+                            a(href="/admin_subjectlist") Subject List 
+                        li
+                            a(href="/create_subject") Create Subject 
+                li 
+                    a.logout(href="logout") Logout
+
+
+        div.container(style='flex-direction:column; flex:1; width:100%')
+            h1 Create User Account
+            div.register
+                div.container
+                    div.form_item
+                        label(for="username") Username  
+                        input(type='text', placeholder='', name="username")
+                    div.form_item
+                        label(for="fullname") Full Name 
+                        input(type='text', placeholder='', name="fullname")
+                    div.form_item
+                        label(for="email") E-mail 
+                        input(type='text', placeholder='', name="email")
+                    div.form_item
+                        label(for="PhoneNumber") Phone Number
+                        input(type='text', placeholder='', name="PhoneNumber")
+                    div.form_item
+                        label(for="address") Address 
+                        input(type='text', placeholder='', name="address")
+                    div.form_item
+                        label(Role) Role:
+                        div.role(style='display: flex; width:100%')
+                            label(Role) instructor:
+                            input(type='radio', name='role', value='instructor')
+
+                            label(Role) student:
+                            input(type='radio', name='role', value='student')
+                    div.form_item        
+                        input(type="submit", value="Register")
+
+
+    footer 
+        p © 2024 Quiz Horizon. All rights reserved.
+
+    script(src = "javascripts/navibar.js")
+    link(rel='stylesheet', href='/stylesheets/admin.css')

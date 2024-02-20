@@ -1,7 +1,6 @@
 extends layout
 
 block content
-
     header.mobile-header 
         button.hamburger 
             div.bar 
@@ -11,7 +10,7 @@ block content
             img(src="/images/logo_white.png", alt="logo")
             ul
                 li 
-                    a(href="/admin_dashboard", style="color:red") Dashboard 
+                    a(href="/admin_dashboard") Dashboard 
                 li
                     a#um_btn(href='#') User Management
                     ul#um-show 
@@ -25,15 +24,14 @@ block content
                         li 
                             a(href="/admin_subjectlist") Subject List 
                         li
-                            a(href="/create_subject") Create Subject 
+                            a(href="/create_subject", style="color:red; border-bottom: 1px solid red") Create Subject 
                 li 
                     a.logout(href="logout") Logout
-
-        
+     
         nav.mobile-nav
             ul
                 li 
-                    a(href="/admin_dashboard", style="color:red") Dashboard 
+                    a(href="/admin_dashboard") Dashboard 
                 li
                     a#mobile_um_btn(href='#') User Management
                     ul#mobile_um-show 
@@ -47,26 +45,31 @@ block content
                         li 
                             a(href="/admin_subjectlist") Subject List 
                         li
-                            a(href="/create_subject") Create Subject 
+                            a(href="/create_subject", style="color:red; border-bottom: 1px solid red") Create Subject 
                 li 
-                    a.logout(href="logout") Logout  
+                    a.logout(href="logout") Logout
 
 
-
-        div.container
-            div.statistic 
-                img(src="/images/user_icon.png", alt="user icon")
-                p User Count: 
-                p #{userCount}
-            div.statistic 
-                img(src="/images/subject_icon.png", alt="user icon")
-                p Subject Count: 
-                p #{subjectCount}
+        div.container(style='flex-direction:column; flex:1; width:100%')
+            h1 Create User Account
+            div.SubjectCreate
+                div.container
+                    div.form_item
+                        label(for="subjectname") Subject Name  
+                        input(type='text', placeholder='', name="username")
+                    div.form_item
+                        label(for="fullname") Assign Instructor 
+                        select(name='instructor', id='instructor')
+                            option(value='volvo') Volvo
+                            option(value='saab') Saab
+                            option(value='mercedes') Mercedes
+                            option(value='audi') Audi
+                    div.form_item        
+                        input(type="submit", value="Create")
 
 
     footer 
         p © 2024 Quiz Horizon. All rights reserved.
 
-    link(rel='stylesheet', href='/stylesheets/admin.css')
     script(src = "javascripts/navibar.js")
-    
+    link(rel='stylesheet', href='/stylesheets/admin.css')
