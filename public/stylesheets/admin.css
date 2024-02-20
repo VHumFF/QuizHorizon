@@ -114,6 +114,7 @@ td {
 
 .register {
   margin-top: 30px;
+  margin-bottom: 30px;
   width: 100%;
   flex: 1;
 }
@@ -132,9 +133,14 @@ td {
   margin-right: auto;
 }
 
+.register .container form {
+  width: 100%;
+}
+
 .register .container .form_item {
   width: 100%;
 }
+
 
 .register .container .form_item label {
   width: 100%;
@@ -170,6 +176,37 @@ td {
   box-shadow: inset 1000px 0 0 0 white;
   color:#001F3F;
 }
+
+#usernameError {
+  color: red;
+  display: none;
+}
+#usernameExist {
+  color: red;
+  display: none;
+}
+#fullnameError {
+  color: red;
+  display: none;
+}
+#emailError {
+  color: red;
+  display: none;
+}
+#addressError {
+  color: red;
+  display: none;
+}
+#contactError {
+  color: red;
+  display: none;
+}
+#roleError {
+  color: red;
+  display: none;
+}
+
+
 
 
 .SubjectCreate {

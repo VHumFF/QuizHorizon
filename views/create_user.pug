@@ -54,35 +54,51 @@ block content
             h1 Create User Account
             div.register
                 div.container
-                    div.form_item
-                        label(for="username") Username  
-                        input(type='text', placeholder='', name="username")
-                    div.form_item
-                        label(for="fullname") Full Name 
-                        input(type='text', placeholder='', name="fullname")
-                    div.form_item
-                        label(for="email") E-mail 
-                        input(type='text', placeholder='', name="email")
-                    div.form_item
-                        label(for="PhoneNumber") Phone Number
-                        input(type='text', placeholder='', name="PhoneNumber")
-                    div.form_item
-                        label(for="address") Address 
-                        input(type='text', placeholder='', name="address")
-                    div.form_item
-                        label(Role) Role:
-                        div.role(style='display: flex; width:100%')
-                            label(Role) instructor:
-                            input(type='radio', name='role', value='instructor')
+                    form#registerForm
+                        div.form_item
+                            p#usernameError Invalid Username, must be 4-20 characters long and contain only letters and numbers.
+                            p#usernameExist Username Exist  
+                            label Username  
+                                input(type='text', placeholder='', name="username", autocomplete="username")
+                        div.form_item
+                            p#fullnameError Invalid Name, must be 4-20 characters long and contain only letters. 
+                            label Full Name 
+                                input(type='text', placeholder='', name="fullname", autocomplete="name")
+                        div.form_item
+                            p#emailError Invalid E-mail, enter a valid email address.
+                            label E-mail 
+                                input(type='text', placeholder='', name="email", autocomplete="email")
+                        div.form_item
+                            p#contactError Invalid Contact Number, must be 7-11 digits long.
+                            label Contact Number
+                                input(type='text', placeholder='', name="contact", autocomplete="contact")
+                        div.form_item
+                            p#addressError Invalid Address, must be 4-40 characters long and may contain letters, numbers, and special characters. 
+                            label Address 
+                                input(type='text', placeholder='', name="address", autocomplete="address")
+                        div.form_item
+                            p#roleError Please select a role
+                            label Role:
+                                div.role(style='display: flex; width:100%')
+                                    label instructor:
+                                        input(type='radio', name='role', value='instructor', id='instructor')
 
-                            label(Role) student:
-                            input(type='radio', name='role', value='student')
-                    div.form_item        
-                        input(type="submit", value="Register")
+                                    label student:
+                                        input(type='radio', name='role', value='student', id='student')
+                        div.form_item        
+                            input(type="submit", value="Register")
+
+
+            #confirmationModal.modal
+                .modal-content
+                    p Are you sure you want to register this user?
+                    button#confirmRegister Yes
+                    button#cancelRegistration Cancel
 
 
     footer 
         p © 2024 Quiz Horizon. All rights reserved.
 
     script(src = "javascripts/navibar.js")
+    script(src = "javascripts/create_user.js")
     link(rel='stylesheet', href='/stylesheets/admin.css')

@@ -3,6 +3,7 @@ const router = express.Router();
 const restrictTo = require('../middlewares/auth_middleware');
 const userListController = require('../controllers/userListController');
 const adminSubjectListController = require('../controllers/adminSubjectListController');
+const create_userController = require('../controllers/create_userController');
 
 
 router.get('/user_list', restrictTo('admin'), (req, res) => {
@@ -64,5 +65,43 @@ router.get('/api/subject-list', async (req, res) => {
 });
 
 router.delete('/subject/:subjectId', adminSubjectListController.deleteSubject);
+
+
+router.post('/validation', (req, res) => {
+  const { username, fullname, email, contact, address } = req.body;
+
+  
+  // Validate form inputs
+  const usernameError = create_userController.validateUsername(username);
+  const fullnameError = create_userController.validateFullName(fullname);
+  const emailError = create_userController.validateEmail(email);
+  const addressError = create_userController.validateaddress(address);
+  const contactError = create_userController.validateContact(contact);
+
+  // Package validation errors into a single JSON object
+  res.json({ usernameError: usernameError, fullnameError: fullnameError,  emailError: emailError, addressError: addressError, contactError: contactError});
+
+});
+
+router.post('/userexist', (req, res) =>{
+  const { username } = req.body;
+  
+  // Call checkUsernameExists with a callback function
+  create_userController.checkUsernameExists(username, (error, userExist) => {
+      if (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Internal Server Error' });
+          return;
+      }
+      // Respond with the result of the username existence check
+      res.json({ userExist: userExist });
+  });
+});
+
+router.post('/register', (req, res) => {
+  const { username, fullname, email, contact, address, role } = req.body;
+  create_userController.registerUser(username, fullname, email, address, contact, role);
+  res.status(200).json({ message: 'User registered successfully' });
+});
 
 module.exports = router;
