@@ -12,6 +12,7 @@ var app = express();
 const session = require('express-session');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
+const instructoRoutes = require('./routes/instructor')
 
 
 app.use(session({
@@ -54,6 +55,7 @@ app.get('/', (req, res) => {
 app.use('/', authRoutes);
 
 app.use('/', adminRoutes);
+app.use('/', instructoRoutes)
 
 
 

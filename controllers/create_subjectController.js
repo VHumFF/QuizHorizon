@@ -6,7 +6,7 @@ async function getInstructorList() {
         SELECT u.user_id, ud.full_name
         FROM users u
         INNER JOIN user_details ud ON u.user_id = ud.user_id
-        WHERE u.role = 'teacher'
+        WHERE u.role = 'instructor'
       `;
   
       db.query(query, (error, results) => {

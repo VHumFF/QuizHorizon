@@ -1,0 +1,14 @@
+
+#profile_pic img{
+    width: 200px;
+    margin: 20px;
+}
+
+#user_details{
+    margin: 20px;
+}
+
+#user_details p{
+    font-size: 1.5rem;
+    font-weight: bold;
+}

@@ -1,0 +1,58 @@
+extends layout
+
+block content
+    header.mobile-header 
+        button.hamburger 
+            div.bar 
+        img(src="/images/logo_white.png", alt="logo")
+    div.page
+        nav
+            img(src="/images/logo_white.png", alt="logo")
+            ul
+                li 
+                    a(href="/instructor_dashboard") Dashboard 
+                li
+                    a#um_btn(href='/subject_list', style="color:red") Subject List
+                li 
+                    a.logout(href="logout") Logout
+
+        
+        nav.mobile-nav
+            ul
+                li 
+                    a(href="/instructor_dashboard") Dashboard
+                li
+                    a#um_btn(href='/subject_list', style="color:red") Subject List
+                li 
+                    a.logout(href="logout") Logout  
+
+        div.container(style='flex-direction:column; flex:1;')
+            h1 Subject List
+            div#table_list_wrapper
+                div#table_list_filter
+                    label Search
+                        input(type='text', id='searchInput', placeholder='', name="search")
+                table
+                    thead
+                        tr
+                            th Subject Name
+                            th Taught By
+                            th Operation
+                        tbody#subjectTableBody
+                        
+                div#page_turner 
+                    label#pageCount 
+                    div#pageBtn 
+                        button#prevPage Previous Page
+                        button#nextPage Next Page
+                        
+                    
+
+
+
+    footer 
+        p © 2024 Quiz Horizon. All rights reserved.
+
+    script(src = "javascripts/navibar.js")
+    script(src = "javascripts/admin_subjectlist.js")
+    link(rel='stylesheet', href='/stylesheets/admin.css')
