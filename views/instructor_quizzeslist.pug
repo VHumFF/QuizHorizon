@@ -12,7 +12,7 @@ block content
                 li 
                     a(href="/instructor_dashboard") Dashboard 
                 li
-                    a#um_btn(href='/subject_list', style="color:red") Subject List
+                    a#um_btn(href='/instructor_subject_list', style="color:red") Subject List
                 li 
                     a.logout(href="logout") Logout
 
@@ -22,12 +22,12 @@ block content
                 li 
                     a(href="/instructor_dashboard") Dashboard
                 li
-                    a#um_btn(href='/subject_list', style="color:red") Subject List
+                    a#um_btn(href='/instructor_subject_list', style="color:red") Subject List
                 li 
                     a.logout(href="logout") Logout  
 
         div.container(style='flex-direction:column; flex:1;')
-            h1 Subject List
+            h1 Quiz List
             div#table_list_wrapper
                 div#table_list_filter
                     label Search
@@ -35,8 +35,8 @@ block content
                 table
                     thead
                         tr
-                            th Subject Name
-                            th Taught By
+                            th Quiz Name
+                            th Status
                             th Operation
                         tbody#subjectTableBody
                         
@@ -53,6 +53,6 @@ block content
     footer 
         p © 2024 Quiz Horizon. All rights reserved.
 
-    script(src = "javascripts/navibar.js")
-    script(src = "javascripts/admin_subjectlist.js")
+    script(src = "/javascripts/navibar.js")
+    script(src = "/javascripts/instructor_quizzeslist.js")
     link(rel='stylesheet', href='/stylesheets/admin.css')
