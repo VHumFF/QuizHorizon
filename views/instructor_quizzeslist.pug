@@ -14,7 +14,7 @@ block content
                 li
                     a#um_btn(href='/instructor_subject_list', style="color:red") Subject List
                 li 
-                    a.logout(href="logout") Logout
+                    a.logout(href="/logout") Logout
 
         
         nav.mobile-nav
@@ -24,7 +24,7 @@ block content
                 li
                     a#um_btn(href='/instructor_subject_list', style="color:red") Subject List
                 li 
-                    a.logout(href="logout") Logout  
+                    a.logout(href="/logout") Logout  
 
         div.container(style='flex-direction:column; flex:1;')
             h1 Quiz List
@@ -32,6 +32,7 @@ block content
                 div#table_list_filter
                     label Search
                         input(type='text', id='searchInput', placeholder='', name="search")
+                    button#openModal ADD
                 table
                     thead
                         tr
@@ -47,7 +48,13 @@ block content
                         button#nextPage Next Page
                         
                     
-
+        .modal#modal
+            .modal-content
+                p#quizError Invalid Quiz name, must be 3-35 characters long and contain only letters.
+                label(for="quizName") Quiz Name:
+                input(type="text", id="quizName", name="quizName")
+                button#createQuiz Create
+                button#closeModal Close
 
 
     footer 
@@ -56,3 +63,4 @@ block content
     script(src = "/javascripts/navibar.js")
     script(src = "/javascripts/instructor_quizzeslist.js")
     link(rel='stylesheet', href='/stylesheets/admin.css')
+    link(rel='stylesheet', href='/stylesheets/instructor.css')

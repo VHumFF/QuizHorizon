@@ -22,24 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchSubjectList(currentPage, searchQuery);
       }
     });
-
-
-    document.getElementById('subjectTableBody').addEventListener('click', (event) => {
-      const openButton = event.target.closest('.openButton');
-    
-      if (openButton) {
-        const subjectToOpen = openButton.getAttribute('data-subjectID');
-
-        openButton.addEventListener('click', handleOpen);
-
-    
-        function handleOpen() {
-          
-        }
-        
-      }
-    });
-
 });
   
   
@@ -64,7 +46,7 @@ function fetchSubjectList(page, searchQuery) {
 
         row.innerHTML = `
           <td>${subjects.subject_name}</td>
-          <td><a href="/subjects/${subjects.subject_id}/quizzes" class="openLink">Open</a></td>
+          <td><a href="/subjects/${subjects.subject_id}" class="openLink">Open</a></td>
         `;
 
         tbody.appendChild(row);
