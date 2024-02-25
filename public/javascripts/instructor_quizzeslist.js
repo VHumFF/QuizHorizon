@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchQuizzesList(currentPage, searchQuery, subjectId);
       }
 
-
     });
     
 
@@ -36,6 +35,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("modal").style.display = "none";
     });
     
+    
+
+
+
+
+
+
+
     
     document.getElementById("createQuiz").addEventListener("click", function(event) {
         var quizNameInput = document.getElementById("quizName");
@@ -74,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         document.getElementById("modal").style.display = "none";
                         currentPage = 1;
                         searchQuery = "";
-                        fetchQuizzesList(currentPage, searchQuery, subjectId)
+                        fetchQuizzesList(currentPage, searchQuery, subjectId);
                   } else {
                         console.error('Failed to create quiz');
                         throw new Error('Failed to create quiz');
@@ -99,6 +106,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+
 function fetchQuizzesList(page, searchQuery, subjectId) {
     fetch(`/api/ins-quizzeslist?page=${page}&search=${searchQuery}&subjectID=${subjectId}`)
       .then(response => response.json())
@@ -119,7 +128,8 @@ function fetchQuizzesList(page, searchQuery, subjectId) {
           row.innerHTML = `
             <td>${quiz.quiz_name}</td>
             <td>${quiz.status}</td>
-            <td><a href="${quiz.quiz_id}" class="openLink">Edit</a></td>
+            <td><a href="${quiz.quiz_id}"><img src="/images/editing.png" alt="Description of the image" class="editIcon"></a>
+    <button onclick="deleteQuiz('${quiz.quiz_id}')" class="deleteButton"><span class="deleteIcon"></span></button></td>
           `;
   
           tbody.appendChild(row);

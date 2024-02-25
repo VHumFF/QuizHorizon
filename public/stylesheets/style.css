@@ -40,6 +40,101 @@ footer {
   flex-wrap: wrap;
 }
 
+#table_list_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-left: 6%;
+}
+
+#table_list_filter {
+  margin-left: auto;
+}
+
+table {
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 1px solid black;
+  
+}
+
+th{
+  text-align: left;
+  background-color: #97d2f0;
+  padding: 5px;
+  word-wrap: break-word;
+  border-right: 1px solid black;
+  
+}
+
+td {
+  border-right: 1px solid black;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.even {
+  background-color: transparent;
+  
+  line-height: 3;
+  word-wrap: break-word;
+}
+
+.odd {
+  background-color: #a19e9e;
+  line-height: 3;
+  word-wrap: break-word;
+}
+
+#page_tuner {
+  width: 100%;
+}
+
+#pageCount {
+  padding: 15px;
+  float:left;
+}
+
+#pageBtn {
+  margin-left: auto;
+  float: right;
+}
+
+#prevPage {
+  margin: 15px;
+}
+
+#nextPage {
+  margin: 15px;
+}
+
+.enterIcon {
+  padding-left: 15px;
+  width: 16px;
+}
+
+.editIcon {
+  padding-left: 15px;
+  width: 16px;
+}
+
+.deleteButton {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.deleteIcon {
+  display: block;
+  width: 16px; /* Adjust width as needed */
+  height: 16px; /* Adjust height as needed */
+  background: url('/images/delete.png') no-repeat center center;
+  background-size: cover;
+}
+
+
 
 
 @media screen and (max-width: 1024px) {
@@ -48,6 +143,24 @@ footer {
     max-height: 100% !important;
   }
 
+  th:nth-child(3),
+  th:nth-child(4),
+  th:nth-child(5) {
+    display: none;
+  }
+
+  /* Hide 3rd, 4th, and 5th columns in the cells */
+  td:nth-child(3),
+  td:nth-child(4),
+  td:nth-child(5) {
+    display: none;
+  }
 }
 
+@media screen and (max-width: 768px) {
+  th, td {
+    width: 50%; /* Set the width to 50% for smaller screens */
+  }
+
+}
 

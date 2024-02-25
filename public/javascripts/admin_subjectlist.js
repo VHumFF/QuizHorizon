@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
           row.innerHTML = `
             <td>${subjects.subject_name}</td>
             <td>${subjects.full_name}</td>
-            <td><button class="deleteButton" data-subjectID="${subjects.subject_id}">Delete</button></td>
+            <td><button class="deleteButton" data-subjectID="${subjects.subject_id}"><span class="deleteIcon"></span></button></td>
           `;
   
           tbody.appendChild(row);

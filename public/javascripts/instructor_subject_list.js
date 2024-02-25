@@ -46,7 +46,7 @@ function fetchSubjectList(page, searchQuery) {
 
         row.innerHTML = `
           <td>${subjects.subject_name}</td>
-          <td><a href="/subjects/${subjects.subject_id}" class="openLink">Open</a></td>
+          <td><a href="/subjects/${subjects.subject_id}"><img src="/images/enter.png" alt="Description of the image" class="enterIcon"></a></td>
         `;
 
         tbody.appendChild(row);

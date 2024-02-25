@@ -95,7 +95,8 @@ function fetchUserDetails(page, searchQuery = '') {
           <td>${user.full_name}</td>
           <td>${user.email}</td>
           <td>${user.address}</td>
-          <td><button class="deleteButton" data-userID="${user.user_id}">Delete</button></td>
+          <td><button class="deleteButton" data-userID="${user.user_id}"><span class="deleteIcon"></span></button></td>
+          
         `;
 
         tbody.appendChild(row);
