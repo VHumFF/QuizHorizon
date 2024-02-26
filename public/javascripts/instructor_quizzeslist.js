@@ -35,15 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("modal").style.display = "none";
     });
     
-    
-
-
-
-
-
-
-
-    
     document.getElementById("createQuiz").addEventListener("click", function(event) {
         var quizNameInput = document.getElementById("quizName");
         var quizName = quizNameInput.value;
@@ -101,6 +92,51 @@ document.addEventListener('DOMContentLoaded', function() {
           });
 
     });
+
+
+
+    document.getElementById('quizTableBody').addEventListener('click', (event) => {
+        const deleteButton = event.target.closest('.deleteButton');
+      
+        if (deleteButton) {
+          const quizToDelete = deleteButton.getAttribute('data-quizID');
+          const confirmationModal = document.getElementById('confirmationModal');
+          confirmationModal.style.display = 'block';
+      
+          const confirmDeleteButton = document.getElementById('confirmDelete');
+          confirmDeleteButton.addEventListener('click', handleConfirmDelete);
+      
+          document.getElementById('cancelDelete').addEventListener('click', () => {
+            confirmationModal.style.display = 'none';
+            confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
+          });
+      
+          
+          function handleConfirmDelete() {
+            fetch(`/quizzes/${quizToDelete}`, {
+              method: 'DELETE',
+            })
+              .then(response => {
+                if (response.ok) {
+                  console.log('quiz deleted successfully');
+                  currentPage = 1;
+                  fetchQuizzesList(currentPage, searchQuery, subjectId);
+                } else {
+                  console.error('Failed to delete quiz');
+                  throw new Error('Failed to delete quiz');
+                }
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              })
+              .finally(() => {
+                confirmationModal.style.display = 'none';
+                confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
+              });
+          }
+          
+        }
+      });
     
 
 });
@@ -112,7 +148,7 @@ function fetchQuizzesList(page, searchQuery, subjectId) {
     fetch(`/api/ins-quizzeslist?page=${page}&search=${searchQuery}&subjectID=${subjectId}`)
       .then(response => response.json())
       .then(data => {
-        const tbody = document.getElementById('subjectTableBody');
+        const tbody = document.getElementById('quizTableBody');
         tbody.innerHTML = ''; // Clear the table
   
         // Loop through the subject and create rows
@@ -128,8 +164,8 @@ function fetchQuizzesList(page, searchQuery, subjectId) {
           row.innerHTML = `
             <td>${quiz.quiz_name}</td>
             <td>${quiz.status}</td>
-            <td><a href="${quiz.quiz_id}"><img src="/images/editing.png" alt="Description of the image" class="editIcon"></a>
-    <button onclick="deleteQuiz('${quiz.quiz_id}')" class="deleteButton"><span class="deleteIcon"></span></button></td>
+            <td><a href="/questions/${quiz.quiz_id}"><img src="/images/editing.png" alt="Description of the image" class="editIcon"></a>
+    <button class="deleteButton" data-quizID="${quiz.quiz_id}"><span class="deleteIcon"></span></button></td>
           `;
   
           tbody.appendChild(row);

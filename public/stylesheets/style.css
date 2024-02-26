@@ -134,6 +134,40 @@ td {
   background-size: cover;
 }
 
+.viewButton {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.viewIconb {
+  display: block;
+  width: 16px; /* Adjust width as needed */
+  height: 16px; /* Adjust height as needed */
+  background: url('/images/view.png') no-repeat center center;
+  background-size: cover;
+}
+
+
+.editButton {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.editIconb {
+  display: block;
+  width: 16px; /* Adjust width as needed */
+  height: 16px; /* Adjust height as needed */
+  background: url('/images/editing.png') no-repeat center center;
+  background-size: cover;
+}
 
 
 

@@ -74,8 +74,28 @@ function createQuiz(quizName, subjectId){
 
 }
 
+
+const deleteQuiz = (req, res) => {
+  const quizId = req.params.quizId;
+  let sql = 'DELETE FROM quizzes WHERE quiz_id = ?';
+
+  db.query(sql, [quizId], (error, result) => {
+    if (error) {
+      console.error('Error deleting quiz:', error);
+      res.status(500).send('Internal Server Error');
+    } else {
+      if (result.affectedRows > 0) {
+        res.status(200).send(); // Respond with success status
+      } else {
+        res.status(404).send('Quiz not found'); // User with the specified ID not found
+      }
+    }
+  });
+};
+
 module.exports = {
     getQuizzesList,
     validateQuizName,
-    createQuiz
+    createQuiz,
+    deleteQuiz
 };

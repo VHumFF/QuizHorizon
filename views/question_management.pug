@@ -27,19 +27,18 @@ block content
                     a.logout(href="/logout") Logout  
 
         div.container(style='flex-direction:column; flex:1;')
-            h1 Quiz List
+            h1 Question List
             div#table_list_wrapper
                 div#table_list_filter
                     label Search
                         input(type='text', id='searchInput', placeholder='', name="search")
-                    button#openModal ADD
+                    button#addButton ADD
                 table
                     thead
                         tr
-                            th Quiz Name
-                            th Status
+                            th Question
                             th Operation
-                        tbody#quizTableBody
+                        tbody#questionTableBody
                         
                 div#page_turner 
                     label#pageCount 
@@ -47,14 +46,6 @@ block content
                         button#prevPage Previous Page
                         button#nextPage Next Page
                         
-                    
-        .modal#modal
-            .modal-content
-                p#quizError Invalid Quiz name, must be 3-35 characters long and contain only letters.
-                label(for="quizName") Quiz Name:
-                input(type="text", id="quizName", name="quizName")
-                button#createQuiz Create
-                button#closeModal Close
         
         #confirmationModal.modal
             .modal-content
@@ -63,9 +54,12 @@ block content
                 button#cancelDelete Cancel
 
 
+        #viewModal
+            .view-modal-content
+
     footer 
         p © 2024 Quiz Horizon. All rights reserved.
 
     script(src = "/javascripts/navibar.js")
-    script(src = "/javascripts/instructor_quizzeslist.js")
+    script(src = "/javascripts/question_management.js")
     link(rel='stylesheet', href='/stylesheets/instructor.css')
