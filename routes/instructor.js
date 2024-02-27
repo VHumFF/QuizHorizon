@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const restrictTo = require('../middlewares/auth_middleware');
-const instructor_dashboardController = require('../controllers/instructor_dashboardController');
+const dashboardController = require('../controllers/dashboardController');
 const instructor_subject_list = require('../controllers/instructor_subject_listController');
 const instructor_quizzeslist = require('../controllers/instructor_quizzeslistController');
 const question_management = require('../controllers/question_managementController');
 
 
 router.get('/profile_info', (req, res) => {
-    instructor_dashboardController.getUserInfo(req, (err, user_info) => {
+    dashboardController.getUserInfo(req, (err, user_info) => {
         if (err) {
             res.status(500).json(err);
             return;

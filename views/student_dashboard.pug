@@ -1,5 +1,49 @@
 extends layout
 
 block content
-    h1 Student Dashboard
-    a(href="logout") Logout
+
+    header.mobile-header 
+        button.hamburger 
+            div.bar 
+        img(src="/images/logo_white.png", alt="logo")
+    div.page
+        nav
+            img(src="/images/logo_white.png", alt="logo")
+            ul
+                li 
+                    a(href="/student_dashboard", style="color:red") Dashboard 
+                li
+                    a#um_btn(href='/student_subject_list') Subject List
+                li 
+                    a.logout(href="logout") Logout
+
+        
+        nav.mobile-nav
+            ul
+                li 
+                    a(href="/student_dashboard", style="color:red") Dashboard
+                li
+                    a#um_btn(href='/student_subject_list') Subject List
+                li 
+                    a.logout(href="logout") Logout  
+
+        div.container(style="flex: 1; flex-direction: column")
+            div#profile_pic 
+                img(src="/images/profile_pic.png", alt="profile pic")
+            div#user_details
+                p#name
+                p#contact
+                p#address
+                p#email
+
+                
+
+
+    footer 
+        p © 2024 Quiz Horizon. All rights reserved.
+
+
+    script(src = "javascripts/navibar.js")
+    script(src = "javascripts/student_dashboard.js")
+    link(rel="stylesheet", href="/stylesheets/instructor.css")
+    
