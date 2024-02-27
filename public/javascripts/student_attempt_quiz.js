@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     document.getElementById('submit-button').addEventListener("click", () => {
-        
+        var quizId = window.location.pathname.split('/').pop();
         const questions = document.getElementById('quiz-questions');
-        const answer = getData(questions)
+        const answer = getData(questions, quizId)
         if (answer === "NOTCHECKED") {
             alert("Please answer all questions before submitting.");
         } else {
@@ -30,8 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
               .catch(error => {
                 console.error('Error:', error);
               });
+              location.href = '/student_subject_list';
         }
-        location.href = '/student_subject_list';
+        
     });
 
     document.getElementById("exit-btn").onclick = function () {
@@ -86,7 +87,7 @@ function getQuestion(quiz_id){
 }
 
 
-function getData(questions) {
+function getData(questions, quizID) {
     // Initialize an empty array to store the extracted data
     let data = {
         answers: [],
@@ -103,7 +104,8 @@ function getData(questions) {
         if (selectedRadioButton) {
             data.answers.push({
                 questionID: selectedRadioButton.name, // Index of the question block
-                answer: selectedRadioButton.value // Value of the selected radio button
+                answer: selectedRadioButton.value, // Value of the selected radio button
+                quiz_ID: quizID
             });
         } else {
             // If no radio button is checked for a question block, set allQuestionsAnswered to false
@@ -119,5 +121,4 @@ function getData(questions) {
     return data;
 }
 
-//const answerForQuestion1 = answer.answers[0].questionID;
 

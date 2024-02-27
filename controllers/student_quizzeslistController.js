@@ -24,8 +24,7 @@ function getQuizzesList(page, search, subject_id) {
       // Fetch total count of items without pagination
       let countSql = `SELECT COUNT(*) AS total FROM quizzes WHERE ('' = ? OR quiz_id LIKE ? OR quiz_name LIKE ?) AND subject_id = ? AND status = "open"`;
 
-      const countValues = [
-        search, searchTermPattern, searchTermPattern, subject_id];
+      const countValues = [search, searchTermPattern, searchTermPattern, subject_id];
 
       db.query(countSql, countValues, (countErr, countResults) => {
         if (countErr) {
@@ -42,8 +41,32 @@ function getQuizzesList(page, search, subject_id) {
 }
 
 
+function getAttempt(quiz_id, user_id) {
+  return new Promise((resolve, reject) => {
+
+    let sql = `SELECT COUNT(*) AS count FROM attempts WHERE user_id = ? AND quiz_id = ?;`;
+
+    const values = [user_id, quiz_id];
+
+    db.query(sql, values, (err, results) => {
+      if (err) {
+        console.error('Error executing MySQL query:', err);
+        reject(err);
+        return;
+      }
+
+      const count = results[0].count;
+
+      resolve(count);
+
+    });
+  });
+}
+
+
 
 
 module.exports = {
     getQuizzesList,
+    getAttempt
 };

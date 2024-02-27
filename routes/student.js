@@ -4,6 +4,7 @@ const restrictTo = require('../middlewares/auth_middleware');
 const student_subject_list = require('../controllers/student_subject_listController');
 const student_quizzeslist = require('../controllers/student_quizzeslistController');
 const student_attempt_quiz = require('../controllers/student_attempt_quizController');
+const student_review_quiz = require('../controllers/student_review_quizController');
 
 
 router.get('/student_subject_list', restrictTo('student'), (req, res) => {
@@ -82,7 +83,37 @@ router.post('/submitQuiz', (req, res) => {
     student_attempt_quiz.submitQuiz(answer, user_id);
   
     res.status(200).json({ message: 'Submit successfully' });
-  });
+});
 
+router.get('/api/get_attempt', async (req, res) => {
+    try {
+        const user_id = req.session.user.user_id;
+        const quizId = req.query.quizId;
+        const attempt = await student_quizzeslist.getAttempt(quizId, user_id);
+        res.json(attempt);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+router.get('/quiz/review/:quizId', restrictTo('student'), (req, res) => {
+    if (!req.session.user) {
+        res.redirect('/');
+    } else {
+        res.render('student_review_quiz');
+    }
+});
+
+router.get('/api/getQuizQuestionAnswer', async (req, res) => {
+    try {
+        const quizId = req.query.quizId;
+        const user_id = req.session.user.user_id;
+        const questions = await student_review_quiz.getQuestionsAnswer(quizId, user_id);
+        res.json(questions);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 module.exports = router;

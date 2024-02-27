@@ -39,8 +39,8 @@ function getQuestions(quizId) {
 function submitQuiz(answers, user_id) {
     
     answers.answers.forEach((answer) => {
-        let sql = 'INSERT INTO attempts (question_id, answer, user_id)VALUES (?, ?, ?)';
-        const data = [answer.questionID, answer.answer, user_id]; 
+        let sql = 'INSERT INTO attempts (question_id, answer, user_id, quiz_id)VALUES (?, ?, ?, ?)';
+        const data = [answer.questionID, answer.answer, user_id, answer.quiz_ID]; 
         db.query(sql, data, (err, results) => {
             if (err) {
                 console.error('Error executing MySQL query:', err);
