@@ -20,7 +20,9 @@ function getUserInfo(req, callback) {
 function change_password(current_password, new_password, confirm_password, user_id, callback) {
     if (new_password !== confirm_password) {
         callback(null, "Passwords do not match");
-    } else {
+    } else if(new_password.length < 7 || new_password.length > 20){
+        callback(null, "Password format wrong");
+    }else {
         let sql = 'SELECT password FROM users WHERE user_id = ?';
         db.query(sql, user_id, (err, results) => {
             if (err) {

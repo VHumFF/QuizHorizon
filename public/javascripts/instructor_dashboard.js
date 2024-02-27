@@ -74,6 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("new_password").value = "";
                 document.getElementById("confirm_password").value = "";
               }
+              else if(data.message === "Password format wrong"){
+                document.getElementById("ChangeNotMatch").style.display = "none";
+                document.getElementById("changeIncorrect").style.display = "none";
+                document.getElementById("changeSuccess").style.display = "none";
+                document.getElementById("changeFormat").style.display = "block";
+              }
             })
             .catch(error => {
                 console.error('Error:', error)
