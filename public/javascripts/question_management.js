@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('addButton').addEventListener('click', () => {
         document.getElementById('viewModal').style.display = 'block';
-        addQuestion();
+        addQuestion(currentPage, searchQuery, quizId);
         
     })
 
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (editButton) {
             const questionToEdit = editButton.getAttribute('data-questionID');
             document.getElementById('viewModal').style.display = 'block';
-            editQuestion(questionToEdit);
+            editQuestion(questionToEdit, currentPage, searchQuery, quizId);
         }
         
     
@@ -143,7 +143,7 @@ function viewQuestion(question_id){
 }
 
 
-function editQuestion(question_id){
+function editQuestion(question_id, currentPage, searchQuery, quizId){
     fetch(`/api/question?questionId=${question_id}`)
       .then(response => response.json())
       .then(data => {
@@ -229,37 +229,49 @@ function editQuestion(question_id){
             viewModal.querySelector('#update-question').addEventListener('click', function () {
                 const questionData = getData(viewModal, question_id);
                 var isEmpty = false;
+                var isAnswerMoreOp = false;
                 if(questionData === "Empty"){
                     isEmpty = true;
+                }else if(questionData === "answer more than option"){
+                    isAnswerMoreOp = true;
                 }
                 else{
                     isEmpty = false;
                 }
-            
-                if (!isEmpty) {
-                    fetch('/updateQuestion', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ questionData: questionData })
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        // Handle successful update
-                        console.log('Question updated successfully:', data);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-                } else {
-                    alert('Question content or options cannot be empty');
+                
+
+                if(!isAnswerMoreOp){
+                    if (!isEmpty) {
+                        fetch('/updateQuestion', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ questionData: questionData })
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            // Handle successful update
+                            console.log('Question updated successfully:', data);
+                            fetchQuestionList(currentPage, searchQuery, quizId);
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                    } else {
+                        alert('Question content or options cannot be empty');
+
+                    }
                 }
+                else{
+                    alert('Answer cannot be more than option');
+                }
+                
             });
             
 
@@ -354,6 +366,10 @@ function getData(viewModal, questionID) {
         }
     });
 
+    if(parseInt(data.answer) > optionInputs.length) {
+        return "answer more than option";
+    }
+
     if(data.question === ""){
         isEmpty = true;
     }
@@ -365,7 +381,7 @@ function getData(viewModal, questionID) {
 }
 
 
-function addQuestion() {
+function addQuestion(currentPage, searchQuery, quizId) {
     const viewModal = document.querySelector('#viewModal .view-modal-content');
     viewModal.innerHTML = `
         <div>
@@ -443,36 +459,47 @@ function addQuestion() {
     document.getElementById('add-question').addEventListener('click', function() {
         const questionData = getData(viewModal, "");
         var isEmpty = false;
+        var isAnswerMoreOp = false;
         if(questionData === "Empty"){
             isEmpty = true;
+        }else if(questionData === "answer more than option"){
+            isAnswerMoreOp = true;
         }
         else{
             isEmpty = false;
         }
-
-        if (!isEmpty) {
-            fetch('/addQuestion', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ questionData: questionData })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Handle successful update
-                console.log('Question added successfully:', data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        } else {
-            alert('Question content or options cannot be empty');
+        if(!isAnswerMoreOp){
+            if (!isEmpty) {
+                fetch('/addQuestion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ questionData: questionData })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Handle successful update
+                    console.log('Question added successfully:', data);
+                    document.getElementById('viewModal').style.display = 'none';
+                    fetchQuestionList(currentPage, searchQuery, quizId);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            } else {
+                alert('Question content or options cannot be empty');
+                
+            }
         }
+        else{
+            alert('answer cannot be larger than option');
+        }
+        
     });
 }
