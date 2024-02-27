@@ -144,6 +144,31 @@ td {
   background-size: cover;
 }
 
+.statusButton {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.lockIcon {
+  display: block;
+  width: 16px; /* Adjust width as needed */
+  height: 16px; /* Adjust height as needed */
+  background: url('/images/lock.png') no-repeat center center;
+  background-size: cover;
+}
+
+.openIcon {
+  display: block;
+  width: 16px; /* Adjust width as needed */
+  height: 16px; /* Adjust height as needed */
+  background: url('/images/open.png') no-repeat center center;
+  background-size: cover;
+}
+
 .viewButton {
   position: relative;
   display: inline-block;

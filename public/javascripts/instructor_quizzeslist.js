@@ -96,47 +96,69 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     document.getElementById('quizTableBody').addEventListener('click', (event) => {
-        const deleteButton = event.target.closest('.deleteButton');
-      
-        if (deleteButton) {
-          const quizToDelete = deleteButton.getAttribute('data-quizID');
-          const confirmationModal = document.getElementById('confirmationModal');
-          confirmationModal.style.display = 'block';
-      
-          const confirmDeleteButton = document.getElementById('confirmDelete');
-          confirmDeleteButton.addEventListener('click', handleConfirmDelete);
-      
-          document.getElementById('cancelDelete').addEventListener('click', () => {
-            confirmationModal.style.display = 'none';
-            confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
-          });
-      
-          
-          function handleConfirmDelete() {
-            fetch(`/quizzes/${quizToDelete}`, {
-              method: 'DELETE',
+      const deleteButton = event.target.closest('.deleteButton');
+      const statusButton = event.target.closest('.statusButton');
+    
+      if (deleteButton) {
+        const quizToDelete = deleteButton.getAttribute('data-quizID');
+        const confirmationModal = document.getElementById('confirmationModal');
+        confirmationModal.style.display = 'block';
+    
+        const confirmDeleteButton = document.getElementById('confirmDelete');
+        confirmDeleteButton.addEventListener('click', handleConfirmDelete);
+    
+        document.getElementById('cancelDelete').addEventListener('click', () => {
+          confirmationModal.style.display = 'none';
+          confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
+        });
+    
+        
+        function handleConfirmDelete() {
+          fetch(`/quizzes/${quizToDelete}`, {
+            method: 'DELETE',
+          })
+            .then(response => {
+              if (response.ok) {
+                console.log('quiz deleted successfully');
+                currentPage = 1;
+                fetchQuizzesList(currentPage, searchQuery, subjectId);
+              } else {
+                console.error('Failed to delete quiz');
+                throw new Error('Failed to delete quiz');
+              }
             })
-              .then(response => {
-                if (response.ok) {
-                  console.log('quiz deleted successfully');
-                  currentPage = 1;
-                  fetchQuizzesList(currentPage, searchQuery, subjectId);
-                } else {
-                  console.error('Failed to delete quiz');
-                  throw new Error('Failed to delete quiz');
-                }
-              })
-              .catch(error => {
-                console.error('Error:', error);
-              })
-              .finally(() => {
-                confirmationModal.style.display = 'none';
-                confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
-              });
-          }
-          
+            .catch(error => {
+              console.error('Error:', error);
+            })
+            .finally(() => {
+              confirmationModal.style.display = 'none';
+              confirmDeleteButton.removeEventListener('click', handleConfirmDelete);
+            });
         }
-      });
+        
+      }
+
+
+
+      if (statusButton) {
+        const quizToChangeStatus = statusButton.getAttribute('data-quizID');
+        fetch(`/api/status/${quizToChangeStatus}`)
+          .then(response => {
+            if (response.ok) {
+              console.log('status updated successfully');
+              currentPage = 1;
+              fetchQuizzesList(currentPage, searchQuery, subjectId);
+            } else {
+              console.error('Failed to update status');
+              throw new Error('Failed to update status');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          })
+      }
+
+    });
     
 
 });
@@ -160,15 +182,23 @@ function fetchQuizzesList(page, searchQuery, subjectId) {
           } else {
             row.classList.add('odd');
           }
-  
-          row.innerHTML = `
+          
+          if(quiz.status === "closed"){
+            row.innerHTML = `
             <td>${quiz.quiz_name}</td>
-            <td>${quiz.status}</td>
+            <td><button class="statusButton" data-quizID="${quiz.quiz_id}"><span class="lockIcon"></span></button></td>
             <td><a href="/questions/${quiz.quiz_id}"><img src="/images/editing.png" alt="Description of the image" class="editIcon"></a>
             <a href="/student-attempt/${quiz.quiz_id}"><img src="/images/results.png" alt="Description of the image" class="resultIcon"></a>
-    <button class="deleteButton" data-quizID="${quiz.quiz_id}"><span class="deleteIcon"></span></button></td>
-    
-          `;
+    <button class="deleteButton" data-quizID="${quiz.quiz_id}"><span class="deleteIcon"></span></button></td>`;
+          }else{
+            row.innerHTML = `
+            <td>${quiz.quiz_name}</td>
+            <td><button class="statusButton" data-quizID="${quiz.quiz_id}"><span class="openIcon"></span></button></td>
+            <td><a href="/questions/${quiz.quiz_id}"><img src="/images/editing.png" alt="Description of the image" class="editIcon"></a>
+            <a href="/student-attempt/${quiz.quiz_id}"><img src="/images/results.png" alt="Description of the image" class="resultIcon"></a>
+    <button class="deleteButton" data-quizID="${quiz.quiz_id}"><span class="deleteIcon"></span></button></td>`;
+          }
+          
   
           tbody.appendChild(row);
         });

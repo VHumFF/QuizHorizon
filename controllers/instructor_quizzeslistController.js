@@ -93,9 +93,24 @@ const deleteQuiz = (req, res) => {
   });
 };
 
+
+function changeStatus(quizId, callback) {
+  const query = "UPDATE quizzes SET status = CASE WHEN status = 'closed' THEN 'open' WHEN status = 'open' THEN 'closed' END WHERE quiz_id = ?;";
+
+  db.query(query, quizId, (error, result) => {
+      if (error) {
+          console.error('Error updating status:', error);
+          callback(error);
+          return;
+      }
+      callback(null);
+  });
+}
+
 module.exports = {
     getQuizzesList,
     validateQuizName,
     createQuiz,
-    deleteQuiz
+    deleteQuiz,
+    changeStatus
 };

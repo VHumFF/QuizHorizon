@@ -184,5 +184,17 @@ router.get('/api/getStudentAttempt', async (req, res) => {
 });
 
 
+router.get('/api/status/:quizId', (req, res) => {
+    const quizId = req.params.quizId;
+    instructor_quizzeslist.changeStatus(quizId, (error) => {
+        if (error) {
+            console.error('Error updating status:', error);
+            res.status(500).send('Error updating status');
+            return;
+        }
+        res.status(200).send('Status updated successfully');
+    });
+});
+
 
 module.exports = router;
