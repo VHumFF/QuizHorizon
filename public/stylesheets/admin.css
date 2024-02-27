@@ -22,7 +22,20 @@
   width: 200px;
 }
 
+th{
+  text-align: left;
+  background-color: #97d2f0;
+  padding: 5px;
+  word-wrap: break-word;
+  border-right: 1px solid black;
+  
+}
 
+td {
+  border-right: 1px solid black;
+  padding-right: 10px;
+  padding-left: 10px;
+}
 
   
 .modal {
@@ -222,3 +235,25 @@
 }
 
 
+@media screen and (max-width: 1024px) {
+
+  th:nth-child(3),
+  th:nth-child(4),
+  th:nth-child(5) {
+    display: none;
+  }
+
+  /* Hide 3rd, 4th, and 5th columns in the cells */
+  td:nth-child(3),
+  td:nth-child(4),
+  td:nth-child(5) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  th, td {
+    width: 50%; /* Set the width to 50% for smaller screens */
+  }
+
+}
