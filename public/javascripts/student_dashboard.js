@@ -1,6 +1,71 @@
 document.addEventListener('DOMContentLoaded', () => {
     fetchUserDetails()
-  
+    const changePasswordForm = document.querySelector('#change_password form');
+
+    if (changePasswordForm) {
+        changePasswordForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            // Retrieve form data
+            const currentPassword = document.querySelector('#current_password').value;
+            const newPassword = document.querySelector('#new_password').value;
+            const confirmPassword = document.querySelector('#confirm_password').value;
+
+            if(currentPassword === "" || newPassword === "" || confirmPassword === ""){
+              alert("Please ensure all fields are filled");
+              document.getElementById("ChangeNotMatch").style.display = "none";
+              document.getElementById("changeIncorrect").style.display = "none";
+              document.getElementById("changeSuccess").style.display = "none";
+            }
+            else if(newPassword !== confirmPassword){
+              document.getElementById("ChangeNotMatch").style.display = "block";
+              document.getElementById("changeIncorrect").style.display = "none";
+              document.getElementById("changeSuccess").style.display = "none";
+            }
+            else{
+              fetch('/api/change_password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    current_password: currentPassword,
+                    new_password: newPassword,
+                    confirm_password: confirmPassword
+                })
+              })
+              .then(response => {
+                if (response.ok) {
+                  // Parse the JSON response
+                  return response.json();
+                } else {
+                    // If the response is not successful, throw an error
+                    throw new Error('Failed to change password');
+                }
+              })
+              .then(data => {
+                if(data.message === "Passwords do not match"){
+                  document.getElementById("ChangeNotMatch").style.display = "block";
+                  document.getElementById("changeIncorrect").style.display = "none";
+                  document.getElementById("changeSuccess").style.display = "none";
+
+                }else if(data.message === "Current password incorrect"){
+                  document.getElementById("ChangeNotMatch").style.display = "none";
+                  document.getElementById("changeIncorrect").style.display = "block";
+                  document.getElementById("changeSuccess").style.display = "none";
+                }
+                else if(data.message === "Password updated successfully"){
+                  document.getElementById("ChangeNotMatch").style.display = "none";
+                  document.getElementById("changeIncorrect").style.display = "none";
+                  document.getElementById("changeSuccess").style.display = "block";
+                }
+              })
+              .catch(error => {
+                  console.error('Error:', error)
+              });
+            }
+        });
+    }
 });
 
 
