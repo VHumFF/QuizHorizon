@@ -55,6 +55,16 @@ router.get('/quiz/attempt/:quizId', restrictTo('student'), (req, res) => {
 });
 
 
+router.get('/api/getQuizName', async (req, res) => {
+    try {
+        const quizId = req.query.quizId;
+        const quizName = await student_attempt_quiz.getQuizName(quizId);
+        res.json(quizName);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 router.get('/api/getQuizQuestion', async (req, res) => {
     try {
         const quizId = req.query.quizId;

@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Extract subject ID from the URL
     var quizId = window.location.pathname.split('/').pop();
+    getQuizName(quizId)
     getQuestion(quizId);
+
+
     
     document.getElementById('submit-button').addEventListener("click", () => {
         
@@ -37,6 +40,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+function getQuizName(quiz_id) {
+    fetch(`/api/getQuizName?quizId=${quiz_id}`)
+      .then(response => response.json())
+      .then(data => {
+        const quizName = document.getElementById('quiz-title');
+        const title = document.createElement('h1');
+        title.innerHTML = `${data}`;
+        quizName.appendChild(title);
+    })
+    .catch(error => console.error('Error:', error));
+}
 
 function getQuestion(quiz_id){
     fetch(`/api/getQuizQuestion?quizId=${quiz_id}`)
