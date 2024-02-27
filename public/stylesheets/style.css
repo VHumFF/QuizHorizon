@@ -248,6 +248,12 @@ td {
   color: #cb2b2b;
 }
 
+#changeFormat {
+  display: none;
+  background-color: #e4c4c4;
+  color: #cb2b2b;
+}
+
 
 @media screen and (max-width: 1024px) {
   body, html {

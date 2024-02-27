@@ -16,11 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
               document.getElementById("ChangeNotMatch").style.display = "none";
               document.getElementById("changeIncorrect").style.display = "none";
               document.getElementById("changeSuccess").style.display = "none";
+              document.getElementById("changeFormat").style.display = "none";
             }
             else if(newPassword !== confirmPassword){
               document.getElementById("ChangeNotMatch").style.display = "block";
               document.getElementById("changeIncorrect").style.display = "none";
               document.getElementById("changeSuccess").style.display = "none";
+              document.getElementById("changeFormat").style.display = "none";
+            }
+            else if(newPassword.length < 7 || newPassword.length > 20){
+              document.getElementById("ChangeNotMatch").style.display = "none";
+              document.getElementById("changeIncorrect").style.display = "none";
+              document.getElementById("changeSuccess").style.display = "none";
+              document.getElementById("changeFormat").style.display = "block";
             }
             else{
               fetch('/api/change_password', {
@@ -48,16 +56,19 @@ document.addEventListener('DOMContentLoaded', () => {
                   document.getElementById("ChangeNotMatch").style.display = "block";
                   document.getElementById("changeIncorrect").style.display = "none";
                   document.getElementById("changeSuccess").style.display = "none";
+                  document.getElementById("changeFormat").style.display = "none";
 
                 }else if(data.message === "Current password incorrect"){
                   document.getElementById("ChangeNotMatch").style.display = "none";
                   document.getElementById("changeIncorrect").style.display = "block";
                   document.getElementById("changeSuccess").style.display = "none";
+                  document.getElementById("changeFormat").style.display = "none";
                 }
                 else if(data.message === "Password updated successfully"){
                   document.getElementById("ChangeNotMatch").style.display = "none";
                   document.getElementById("changeIncorrect").style.display = "none";
                   document.getElementById("changeSuccess").style.display = "block";
+                  document.getElementById("changeFormat").style.display = "none";
 
                   document.getElementById("current_password").value = "";
                   document.getElementById("new_password").value = "";
