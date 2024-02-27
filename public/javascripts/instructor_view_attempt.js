@@ -1,17 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Extract subject ID from the URL
-    var quizId = window.location.pathname.split('/').pop();
+    var urlParts = window.location.pathname.split('/');
+    var quizId = parseInt(urlParts[urlParts.length - 2]);
+    var userId = window.location.pathname.split('/').pop();
     getQuizName(quizId)
-    getQuestion(quizId);
+    getQuestion(quizId, userId);
 
 
     document.getElementById('close-button').addEventListener("click", () => {
-        location.href = '/student_subject_list';
+        location.href = '/instructor_subject_list';
         
     });
 
     document.getElementById("exit-btn").onclick = function () {
-        location.href = "/student_subject_list";
+        location.href = "/instructor_subject_list";
     };
 });
 
@@ -28,8 +30,8 @@ function getQuizName(quiz_id) {
     .catch(error => console.error('Error:', error));
 }
 
-function getQuestion(quiz_id){
-    fetch(`/api/getQuizQuestionAnswer?quizId=${quiz_id}`)
+function getQuestion(quiz_id, userId){
+    fetch(`/api/getStudentAttempt?quizId=${quiz_id}&userId=${userId}`)
       .then(response => response.json())
       .then(data => {
         const questions = document.getElementById('quiz-questions');

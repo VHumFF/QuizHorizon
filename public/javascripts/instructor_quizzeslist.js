@@ -165,7 +165,9 @@ function fetchQuizzesList(page, searchQuery, subjectId) {
             <td>${quiz.quiz_name}</td>
             <td>${quiz.status}</td>
             <td><a href="/questions/${quiz.quiz_id}"><img src="/images/editing.png" alt="Description of the image" class="editIcon"></a>
+            <a href="/student-attempt/${quiz.quiz_id}"><img src="/images/results.png" alt="Description of the image" class="resultIcon"></a>
     <button class="deleteButton" data-quizID="${quiz.quiz_id}"><span class="deleteIcon"></span></button></td>
+    
           `;
   
           tbody.appendChild(row);

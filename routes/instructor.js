@@ -5,6 +5,8 @@ const dashboardController = require('../controllers/dashboardController');
 const instructor_subject_list = require('../controllers/instructor_subject_listController');
 const instructor_quizzeslist = require('../controllers/instructor_quizzeslistController');
 const question_management = require('../controllers/question_managementController');
+const attempt_list = require('../controllers/instructor_student_attempt_listController');
+const review_attempt_list = require('../controllers/student_review_quizController');
 
 
 router.get('/profile_info', (req, res) => {
@@ -140,5 +142,47 @@ router.post('/addQuestion', (req, res) => {
 
 
 router.delete('/question/:questionId', question_management.deleteQuestion);
+
+
+router.get('/student-attempt/:quizId', restrictTo('instructor'), (req, res) => {
+    if (!req.session.user) {
+        res.redirect('/');
+    } else {
+        res.render('instructor_student_attempt_list');
+    }
+});
+
+router.get('/api/ins-attemptList', async (req, res) => {
+    try {
+        const quizId = req.query.quizId;
+        const page = parseInt(req.query.page) || 1;
+        const search = req.query.search || "";
+        const attempt = await attempt_list.getAttemptList(page, search, quizId);
+        res.json(attempt);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.get('/viewAttempt/:quizId/:user_id', restrictTo('instructor'), (req, res) => {
+    if (!req.session.user) {
+        res.redirect('/');
+    } else {
+        res.render('instructor_view_attempt');
+    }
+});
+
+router.get('/api/getStudentAttempt', async (req, res) => {
+    try {
+        const quizId = req.query.quizId;
+        const user_id = req.query.userId;
+        const questions = await review_attempt_list.getQuestionsAnswer(quizId, user_id);
+        res.json(questions);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
 
 module.exports = router;

@@ -117,6 +117,16 @@ td {
   width: 16px;
 }
 
+.viewIcon {
+  padding-left: 15px;
+  width: 16px;
+}
+
+.resultIcon {
+  padding-left: 15px;
+  width: 16px;
+}
+
 .deleteButton {
   position: relative;
   display: inline-block;
@@ -169,6 +179,49 @@ td {
   background-size: cover;
 }
 
+
+#change_password {
+  margin: 20px;
+  margin-top: 500px;
+}
+
+#change_password form {
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 10px
+}
+
+#change_password .form-group {
+  margin-bottom: 15px;
+}
+
+#change_password label {
+  display: inline-block;
+  width: 150px; /* Adjust this width as needed */
+}
+
+#change_password input[type="password"] {
+  width: 250px; /* Adjust this width as needed */
+}
+
+#changeIncorrect {
+  display: none;
+  background-color: #e4c4c4;
+  color: #cb2b2b;
+}
+
+#changeSuccess {
+  display: none;
+  background-color: #AFE1AF;
+  color: #097969;
+}
+
+#ChangeNotMatch {
+  display: none;
+  background-color: #e4c4c4;
+  color: #cb2b2b;
+}
 
 
 @media screen and (max-width: 1024px) {
