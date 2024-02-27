@@ -58,6 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
                   document.getElementById("ChangeNotMatch").style.display = "none";
                   document.getElementById("changeIncorrect").style.display = "none";
                   document.getElementById("changeSuccess").style.display = "block";
+
+                  document.getElementById("current_password").value = "";
+                  document.getElementById("new_password").value = "";
+                  document.getElementById("confirm_password").value = "";
                 }
               })
               .catch(error => {
