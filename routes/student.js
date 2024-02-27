@@ -66,4 +66,13 @@ router.get('/api/getQuizQuestion', async (req, res) => {
 });
 
 
+router.post('/submitQuiz', (req, res) => {
+    const { answer } = req.body;
+    const user_id = req.session.user.user_id;
+    student_attempt_quiz.submitQuiz(answer, user_id);
+  
+    res.status(200).json({ message: 'Submit successfully' });
+  });
+
+
 module.exports = router;

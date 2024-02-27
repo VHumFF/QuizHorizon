@@ -3,9 +3,22 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        script(src = "/javascripts/student_attempt_quiz.js")
+        script(src="/javascripts/student_attempt_quiz.js")
+        link(rel='stylesheet', href='/stylesheets/student.css')
         title Quiz
+        style.
+            /* Add your CSS styles here */
+            .top-bar {
+                background-color: #333;
+                color: #fff;
+                padding: 10px;
+                text-align: right;
+            }
     body 
+        // Top Bar section
+        div.top-bar
+            button#exit-btn(type="button") Exit Quiz
+
         // Title section
         div.quiz-title
             h1 This is the Quiz Title
@@ -14,8 +27,5 @@ html(lang="en")
         div#quiz-questions
         
         // Submit button
-        div.submit-button
-            button(type="submit") Submit
-
-
-    
+        div
+            button(type="submit" id="submit-button") Submit
