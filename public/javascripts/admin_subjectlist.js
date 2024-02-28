@@ -1,6 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    // This ensures that the script runs after the DOM has been fully loaded
+
     let currentPage = 1;
     let searchQuery = "";
     fetchSubjectList(currentPage, searchQuery);

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Extract subject ID from the URL
+
     var quizId = window.location.pathname.split('/').pop();
     getQuizName(quizId)
     getQuestion(quizId);
@@ -88,23 +88,23 @@ function getQuestion(quiz_id){
 
 
 function getData(questions, quizID) {
-    // Initialize an empty array to store the extracted data
+    //empty array to store the extracted answer
     let data = {
         answers: [],
     };
 
     // Extract answer from each question
     const questionBlocks = questions.querySelectorAll('.questionBlock');
-    let allQuestionsAnswered = true; // Initialize a variable to track if all questions are answered
+    let allQuestionsAnswered = true; //to track if all questions are answered
     questionBlocks.forEach((questionBlock) => {
-        // Find the selected radio button within each question block
+        // Find the selected radio button in each question block
         const selectedRadioButton = questionBlock.querySelector('input[type="radio"]:checked');
         
         // If a radio button is selected, add its value to the answers array
         if (selectedRadioButton) {
             data.answers.push({
-                questionID: selectedRadioButton.name, // Index of the question block
-                answer: selectedRadioButton.value, // Value of the selected radio button
+                questionID: selectedRadioButton.name,
+                answer: selectedRadioButton.value,
                 quiz_ID: quizID
             });
         } else {
@@ -113,7 +113,7 @@ function getData(questions, quizID) {
         }
     });
 
-    // If any question block doesn't have a checked radio button, return false
+    // If any question block doesn't have a checked radio button, return NOTCHECKED
     if (!allQuestionsAnswered) {
         return "NOTCHECKED";
     }

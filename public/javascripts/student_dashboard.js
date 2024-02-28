@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (changePasswordForm) {
         changePasswordForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission behavior
+            event.preventDefault();
 
-            // Retrieve form data
+
             const currentPassword = document.querySelector('#current_password').value;
             const newPassword = document.querySelector('#new_password').value;
             const confirmPassword = document.querySelector('#confirm_password').value;
@@ -44,10 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
               })
               .then(response => {
                 if (response.ok) {
-                  // Parse the JSON response
+
                   return response.json();
                 } else {
-                    // If the response is not successful, throw an error
+
                     throw new Error('Failed to change password');
                 }
               })
@@ -94,7 +94,7 @@ function fetchUserDetails() {
     fetch(`/profile_info`)
       .then(response => response.json())
       .then(data => {
-        // Populate user details in the HTML elements
+
         document.getElementById('name').innerText = `NAME: ${data.full_name}`;
         document.getElementById('contact').innerText = `CONTACT: ${data.contact}`;
         document.getElementById('address').innerText = `ADDRESS: ${data.address}`;

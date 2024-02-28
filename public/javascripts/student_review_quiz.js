@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Extract subject ID from the URL
+
     var quizId = window.location.pathname.split('/').pop();
     getQuizName(quizId)
     getQuestion(quizId);
@@ -45,9 +45,9 @@ function getQuestion(quiz_id){
 
                 let radioStyle = '';
                 if (isChecked && isCorrect) {
-                    radioStyle = 'background-color: #AFE1AF;'; // Style the radio button for the user's attempt
+                    radioStyle = 'background-color: #AFE1AF;';
                 } else if (isCorrect) {
-                    radioStyle = 'background-color: #AFE1AF;'; // Style the radio button for the correct answer
+                    radioStyle = 'background-color: #AFE1AF;';
                 } else if (isChecked){
                     radioStyle = 'background-color: #FF5733;'
                 }

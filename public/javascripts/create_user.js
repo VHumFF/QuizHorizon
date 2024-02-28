@@ -115,7 +115,6 @@ document.getElementById('registerForm').addEventListener('submit', function(even
                 })
                 .catch(error => {
                     console.error('Error checking username existence:', error);
-                    // Handle errors as needed
                 });
         }
     })
@@ -144,7 +143,6 @@ async function checkUsernameExistence(username) {
       return data.userExist;
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
-      // Return null or handle the error as needed
       return null;
     }
   }

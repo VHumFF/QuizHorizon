@@ -47,9 +47,9 @@ function getQuestion(quiz_id, userId){
 
                 let radioStyle = '';
                 if (isChecked && isCorrect) {
-                    radioStyle = 'background-color: #AFE1AF;'; // Style the radio button for the user's attempt
+                    radioStyle = 'background-color: #AFE1AF;';
                 } else if (isCorrect) {
-                    radioStyle = 'background-color: #AFE1AF;'; // Style the radio button for the correct answer
+                    radioStyle = 'background-color: #AFE1AF;';
                 } else if (isChecked){
                     radioStyle = 'background-color: #FF5733;'
                 }
@@ -77,9 +77,5 @@ function getQuestion(quiz_id, userId){
     })
     .catch(error => console.error('Error:', error));
 }
-
-
-
-
 
 

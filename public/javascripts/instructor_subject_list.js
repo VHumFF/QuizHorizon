@@ -1,6 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-    // This ensures that the script runs after the DOM has been fully loaded
+
     let currentPage = 1;
     let searchQuery = "";
     fetchSubjectList(currentPage, searchQuery);
@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('searchInput').addEventListener('input', function () {
       searchQuery = this.value.trim();
       currentPage = 1;
-      fetchSubjectList(currentPage, searchQuery); // Reset to page 1 and apply the search
+      fetchSubjectList(currentPage, searchQuery);
     });
-    // Handle pagination button clicks
+
     document.getElementById('nextPage').addEventListener('click', () => {
       currentPage++;
       fetchSubjectList(currentPage, searchQuery);
@@ -34,7 +34,7 @@ function fetchSubjectList(page, searchQuery) {
       const tbody = document.getElementById('subjectTableBody');
       tbody.innerHTML = ''; // Clear the table
 
-      // Loop through the subject and create rows
+
       data.rows.forEach((subjects, index) => {
         const row = document.createElement('tr');
 
@@ -53,7 +53,7 @@ function fetchSubjectList(page, searchQuery) {
       });
       const pageCountDisplay = document.getElementById('pageCount');
       pageCountDisplay.textContent = `Page ${page} of ${Math.ceil(data.total / 10)}`;
-      // Update pagination buttons based on total count and current page
+  
       updatePaginationButtons(page, data.total);
     })
     .catch(error => console.error('Error:', error));

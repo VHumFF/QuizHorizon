@@ -1,10 +1,9 @@
 const db = require('../models/db');
 
-const ITEMS_PER_PAGE = 10; // Adjust the number of items per page as needed
+const ITEMS_PER_PAGE = 10;
 
 function getUserDetails(page, search) {
   return new Promise((resolve, reject) => {
-    // Modify your SQL query based on the search criteria
     let sql = `
       SELECT
         users.user_id,
@@ -27,7 +26,7 @@ function getUserDetails(page, search) {
       LIMIT ?, ?;
     `;
 
-    // Using placeholders to prevent SQL injection
+
     const searchTermPattern = `%${search}%`;
     const values = [
       search, searchTermPattern, searchTermPattern, searchTermPattern, searchTermPattern, searchTermPattern,
@@ -41,7 +40,7 @@ function getUserDetails(page, search) {
         return;
       }
 
-      // Fetch total count of items without pagination
+
       let countSql = `
         SELECT COUNT(*) AS total FROM users
         JOIN user_details ON users.user_id = user_details.user_id

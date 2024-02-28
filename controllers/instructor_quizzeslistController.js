@@ -1,10 +1,10 @@
 const db = require('../models/db');
 
-const ITEMS_PER_PAGE = 10; // Adjust the number of items per page as needed
+const ITEMS_PER_PAGE = 10;
 
 function getQuizzesList(page, search, subject_id) {
   return new Promise((resolve, reject) => {
-    // Modify your SQL query based on the search criteria
+
     let sql = `
     SELECT quiz_id, quiz_name, status
     FROM quizzes 
@@ -14,7 +14,7 @@ function getQuizzesList(page, search, subject_id) {
     LIMIT ?, ?;
 `;
 
-    // Using placeholders to prevent SQL injection
+
     const searchTermPattern = `%${search}%`;
     const values = [
       search, searchTermPattern, searchTermPattern, searchTermPattern, subject_id,
@@ -28,7 +28,7 @@ function getQuizzesList(page, search, subject_id) {
         return;
       }
 
-      // Fetch total count of items without pagination
+
       let countSql = `SELECT COUNT(*) AS total FROM quizzes
       WHERE
           ('' = ? OR quiz_id LIKE ? OR quiz_name LIKE ? OR status LIKE ?) AND subject_id = ?
@@ -54,7 +54,7 @@ function getQuizzesList(page, search, subject_id) {
 
 function validateQuizName(quizName) {
 
-  // Validate username
+  // Validate quiz name
   const quizNameRegex = /^[a-zA-Z\s]{3,20}$/;
   if (!quizName || !quizNameRegex.test(quizName)) {
       return false;
@@ -87,7 +87,7 @@ const deleteQuiz = (req, res) => {
       if (result.affectedRows > 0) {
         res.status(200).send(); // Respond with success status
       } else {
-        res.status(404).send('Quiz not found'); // User with the specified ID not found
+        res.status(404).send('Quiz not found');
       }
     }
   });

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Extract subject ID from the URL
     var quizId = window.location.pathname.split('/').pop();
 
-    // This ensures that the script runs after the DOM has been fully loaded
+
     let currentPage = 1;
     let searchQuery = "";
     fetchQuestionList(currentPage, searchQuery, quizId);
@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('searchInput').addEventListener('input', function () {
       searchQuery = this.value.trim();
       currentPage = 1;
-      fetchQuestionList(currentPage, searchQuery, quizId); // Reset to page 1 and apply the search
+      fetchQuestionList(currentPage, searchQuery, quizId);
     });
-    // Handle pagination button clicks
+
     document.getElementById('nextPage').addEventListener('click', () => {
       currentPage++;
       fetchQuestionList(currentPage, searchQuery, quizId);
@@ -289,9 +289,8 @@ function fetchQuestionList(page, searchQuery, quizId) {
       .then(response => response.json())
       .then(data => {
         const tbody = document.getElementById('questionTableBody');
-        tbody.innerHTML = ''; // Clear the table
+        tbody.innerHTML = '';
   
-        // Loop through the subject and create rows
         data.rows.forEach((question, index) => {
           const row = document.createElement('tr');
   
@@ -312,7 +311,6 @@ function fetchQuestionList(page, searchQuery, quizId) {
         });
         const pageCountDisplay = document.getElementById('pageCount');
         pageCountDisplay.textContent = `Page ${page} of ${Math.ceil(data.total / 10)}`;
-        // Update pagination buttons based on total count and current page
         updatePaginationButtons(page, data.total);
       })
       .catch(error => console.error('Error:', error));
@@ -332,7 +330,7 @@ function updatePaginationButtons(currentPage, totalCount) {
 
 
 function getData(viewModal, questionID) {
-    // Initialize an empty object to store the extracted data
+    //empty object to store the extracted data
     let data = {
         question: "",
         answer: "",

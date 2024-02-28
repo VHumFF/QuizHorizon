@@ -1,10 +1,10 @@
 const db = require('../models/db');
 
-const ITEMS_PER_PAGE = 10; // Adjust the number of items per page as needed
+const ITEMS_PER_PAGE = 10;
 
 function getQuestionList(page, search, quiz_id) {
   return new Promise((resolve, reject) => {
-    // Modify your SQL query based on the search criteria
+
     let sql = `
     SELECT question_id, question
     FROM questions 
@@ -14,7 +14,7 @@ function getQuestionList(page, search, quiz_id) {
     LIMIT ?, ?;
 `;
 
-    // Using placeholders to prevent SQL injection
+
     const searchTermPattern = `%${search}%`;
     const values = [
       search, searchTermPattern, searchTermPattern, quiz_id,
@@ -28,7 +28,7 @@ function getQuestionList(page, search, quiz_id) {
         return;
       }
 
-      // Fetch total count of items without pagination
+
       let countSql = `SELECT COUNT(*) AS total FROM questions
       WHERE
           ('' = ? OR question_id LIKE ? OR question LIKE ?) AND quiz_id = ?
@@ -54,7 +54,7 @@ function getQuestionList(page, search, quiz_id) {
 
 function getQuestion(questionId) {
     return new Promise((resolve, reject) => {
-      // Modify your SQL query based on the search criteria
+
         let sql = 'SELECT question, options, answer FROM questions WHERE question_id = ?';
   
         db.query(sql, questionId, (err, results) => {
@@ -69,7 +69,7 @@ function getQuestion(questionId) {
 
 function updateQuestion(questionData) {
     return new Promise((resolve, reject) => {
-      // Modify your SQL query based on the search criteria
+
         let sql = 'UPDATE questions SET question = ?, options = ?, answer = ? WHERE question_id = ?';
         const data = [questionData.question, questionData.options, questionData.answer, questionData.question_id]; 
   
@@ -86,7 +86,7 @@ function updateQuestion(questionData) {
 
 function addQuestion(questionData) {
     return new Promise((resolve, reject) => {
-      // Modify your SQL query based on the search criteria
+
         let sql = 'INSERT INTO questions (question, options, answer, quiz_id) VALUES (?, ?, ?, ?)';
         const data = [questionData.question, questionData.options, questionData.answer, questionData.quizId]; 
   
@@ -113,7 +113,7 @@ const deleteQuestion = (req, res) => {
         if (result.affectedRows > 0) {
           res.status(200).send(); // Respond with success status
         } else {
-          res.status(404).send('Question not found'); // User with the specified ID not found
+          res.status(404).send('Question not found');
         }
       }
     });

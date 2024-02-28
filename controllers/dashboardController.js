@@ -2,7 +2,7 @@ const db = require('../models/db');
 
 
 function getUserInfo(req, callback) {
-    const user_id = req.session.user.user_id; // Assuming user_id is stored in req.session.user
+    const user_id = req.session.user.user_id;
     let sql = 'SELECT full_name, contact, address, email FROM user_details WHERE user_id = ?';
 
     db.query(sql, user_id, (err, results) => {
@@ -45,7 +45,7 @@ function change_password(current_password, new_password, confirm_password, user_
                         callback('Internal Server Error', null);
                         return;
                     }
-                    // Password updated successfully
+
                     callback(null, 'Password updated successfully');
                 });
             }
@@ -53,7 +53,7 @@ function change_password(current_password, new_password, confirm_password, user_
     }
 }
 
-//res.render('index', { loginFailed: true });
+
 
 module.exports = {
     getUserInfo,

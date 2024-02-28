@@ -1,10 +1,10 @@
 const db = require('../models/db');
 
-const ITEMS_PER_PAGE = 10; // Adjust the number of items per page as needed
+const ITEMS_PER_PAGE = 10;
 
 function getSubjectList(page, search, user_id) {
   return new Promise((resolve, reject) => {
-    // Modify your SQL query based on the search criteria
+
     let sql = `
     SELECT subject_id, subject_name 
     FROM subjects 
@@ -13,7 +13,6 @@ function getSubjectList(page, search, user_id) {
     LIMIT ?, ?;
 `;
 
-    // Using placeholders to prevent SQL injection
     const searchTermPattern = `%${search}%`;
     const values = [
       search, searchTermPattern, searchTermPattern, user_id,
@@ -27,7 +26,7 @@ function getSubjectList(page, search, user_id) {
         return;
       }
 
-      // Fetch total count of items without pagination
+
       let countSql = `SELECT COUNT(*) AS total FROM subjects
       WHERE
           ('' = ? OR subject_id LIKE ? OR subject_name LIKE ?) AND taught_by = ?

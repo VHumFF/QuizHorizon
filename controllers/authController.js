@@ -32,7 +32,7 @@ function logout(req, res) {
     });
 }
 
-// Export the controller functions
+
 module.exports = {
     login,
     logout,

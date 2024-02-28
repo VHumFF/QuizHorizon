@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
+//fetch the user details
 function fetchUserDetails() {
   fetch(`/api/instructorList`)
     .then(response => response.json())

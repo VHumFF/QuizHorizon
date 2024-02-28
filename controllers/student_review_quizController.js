@@ -3,7 +3,7 @@ const db = require('../models/db');
 
 function getQuestionsAnswer(quizId, user_id) {
     return new Promise((resolve, reject) => {
-        // Modify your SQL query to join the attempts table with the questions table
+
         let sql = `
             SELECT q.question_id, q.question, q.options, q.answer, a.answer AS user_attempt
             FROM questions q

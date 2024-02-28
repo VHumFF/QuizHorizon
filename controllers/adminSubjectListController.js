@@ -1,10 +1,9 @@
 const db = require('../models/db');
 
-const ITEMS_PER_PAGE = 10; // Adjust the number of items per page as needed
+const ITEMS_PER_PAGE = 10;
 
 function getSubjectList(page, search) {
   return new Promise((resolve, reject) => {
-    // Modify your SQL query based on the search criteria
     let sql = `
   SELECT
     subject_id,
@@ -77,9 +76,9 @@ const deleteSubject = (req, res) => {
       res.status(500).send('Internal Server Error');
     } else {
       if (result.affectedRows > 0) {
-        res.status(200).send(); // Respond with success status
+        res.status(200).send();
       } else {
-        res.status(404).send('Subject not found'); // User with the specified ID not found
+        res.status(404).send('Subject not found');
       }
     }
   });

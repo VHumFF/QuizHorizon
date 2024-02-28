@@ -1,6 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-  // This ensures that the script runs after the DOM has been fully loaded
+
   let currentPage = 1;
   let searchQuery = "";
   fetchUserDetails(currentPage, searchQuery);
@@ -8,9 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('searchInput').addEventListener('input', function () {
     searchQuery = this.value.trim();
     currentPage = 1;
-    fetchUserDetails(currentPage, searchQuery); // Reset to page 1 and apply the search
+    fetchUserDetails(currentPage, searchQuery);
   });
-  // Handle pagination button clicks
   document.getElementById('nextPage').addEventListener('click', () => {
     currentPage++;
     fetchUserDetails(currentPage, searchQuery);
@@ -77,9 +76,9 @@ function fetchUserDetails(page, searchQuery = '') {
     .then(response => response.json())
     .then(data => {
       const tbody = document.getElementById('userTableBody');
-      tbody.innerHTML = ''; // Clear the table
+      tbody.innerHTML = '';
 
-      // Loop through the user details and create rows
+
       data.rows.forEach((user, index) => {
         const row = document.createElement('tr');
 
@@ -103,7 +102,7 @@ function fetchUserDetails(page, searchQuery = '') {
       });
       const pageCountDisplay = document.getElementById('pageCount');
       pageCountDisplay.textContent = `Page ${page} of ${Math.ceil(data.total / 10)}`;
-      // Update pagination buttons based on total count and current page
+
       updatePaginationButtons(page, data.total);
     })
     .catch(error => console.error('Error:', error));

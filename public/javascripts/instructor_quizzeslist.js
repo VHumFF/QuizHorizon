@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Extract subject ID from the URL
     var subjectId = window.location.pathname.split('/').pop();
 
-    // This ensures that the script runs after the DOM has been fully loaded
+
     let currentPage = 1;
     let searchQuery = "";
     fetchQuizzesList(currentPage, searchQuery, subjectId);
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('searchInput').addEventListener('input', function () {
       searchQuery = this.value.trim();
       currentPage = 1;
-      fetchQuizzesList(currentPage, searchQuery, subjectId); // Reset to page 1 and apply the search
+      fetchQuizzesList(currentPage, searchQuery, subjectId);
     });
     // Handle pagination button clicks
     document.getElementById('nextPage').addEventListener('click', () => {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("createQuiz").addEventListener("click", function(event) {
         var quizNameInput = document.getElementById("quizName");
         var quizName = quizNameInput.value;
-        // Do something with the quiz name, like creating a quiz
+
         
 
         fetch('/validateQuizName', {
@@ -173,7 +173,7 @@ function fetchQuizzesList(page, searchQuery, subjectId) {
         const tbody = document.getElementById('quizTableBody');
         tbody.innerHTML = ''; // Clear the table
   
-        // Loop through the subject and create rows
+        // Loop through the quiz and create rows
         data.rows.forEach((quiz, index) => {
           const row = document.createElement('tr');
   

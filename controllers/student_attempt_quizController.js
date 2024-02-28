@@ -3,7 +3,7 @@ const db = require('../models/db');
 
 function getQuizName(quizId) {
     return new Promise((resolve, reject) => {
-        // Modify your SQL query based on the search criteria
+
         let sql = 'SELECT quiz_name FROM quizzes WHERE quiz_id = ?';
 
         db.query(sql, quizId, (err, results) => {
@@ -11,11 +11,11 @@ function getQuizName(quizId) {
                 console.error('Error executing MySQL query:', err);
                 reject(err);
             }
-            // Assuming results is an array with one object containing quiz_name
+
             if (results.length > 0) {
                 resolve(results[0].quiz_name);
             } else {
-                reject(new Error('Quiz not found')); // Reject if quiz not found
+                reject(new Error('Quiz not found'));
             }
         });
     });
@@ -23,7 +23,7 @@ function getQuizName(quizId) {
 
 function getQuestions(quizId) {
     return new Promise((resolve, reject) => {
-      // Modify your SQL query based on the search criteria
+
         let sql = 'SELECT question_id, question, options FROM questions WHERE quiz_id = ?';
   
         db.query(sql, quizId, (err, results) => {

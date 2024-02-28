@@ -13,7 +13,7 @@ function validateUsername(username) {
 function checkUsernameExists(username, callback) {
     const sql = `SELECT COUNT(*) AS count FROM users WHERE username = ?`;
 
-    // Perform the database query
+
     db.query(sql, [username], (error, results) => {
         if (error) {
             // Pass any errors to the callback
@@ -28,7 +28,6 @@ function checkUsernameExists(username, callback) {
         else{
             callback(null, false);
         }
-        // Pass the username existence status to the callback
         
     });
 }
@@ -73,14 +72,14 @@ function validateEmail(email) {
 
 function registerUser(username, fullname, email, address, contact, role){
     const userQuery = 'INSERT INTO users (username, role, password) VALUES (?, ?, ?)';
-    const userData = [username, role, username]; // Assuming password is same as username
+    const userData = [username, role, username]; //set username and password same
     db.query(userQuery, userData, (error, userResult, fields) => {
     if (error) {
         console.error('Error inserting into users table:', error);
         return;
     }
     
-    // Step 2: Use the auto-generated userid to insert user details into user_details table
+    //Use the auto-generated userid to insert user details into user_details table
     const userid = userResult.insertId; // Get the auto-generated userid
     const userDetailsQuery = 'INSERT INTO user_details (user_id, full_name, email, address, contact) VALUES (?, ?, ?, ?, ?)';
     const userDetailsData = [userid, fullname, email, address, contact];
@@ -94,7 +93,7 @@ function registerUser(username, fullname, email, address, contact, role){
     });
 }
 
-// Export the controller functions
+
 module.exports = {
     validateUsername,
     checkUsernameExists,
